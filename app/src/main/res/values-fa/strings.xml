@@ -1,0 +1,74 @@
+<resources>
+    <string name="app_name">ارسال پیامک بلند</string>
+    <string name="load_contacts">بارگذاری مخاطبین</string>
+    <string name="select_all">انتخاب همه</string>
+    <string name="clear_selection">پاک کردن</string>
+    <string name="phone_hint">شماره تلفن دستی</string>
+    <string name="message_hint">پیام خود را اینجا بنویسید…</string>
+    <string name="paste">چسباندن</string>
+    <string name="send">ارسال</string>
+    <string name="segments_format">%1$d بخش (%2$d کاراکتر باقی مانده)</string>
+    <string name="status_loaded">%1$d مخاطب بارگذاری شد</string>
+    <string name="permission_rationale_title">مجوزها مورد نیاز است</string>
+    <string name="permission_rationale_message">این برنامه برای ارسال پیامک به مجوز SMS و برای انتخاب گیرندگان به مجوز مخاطبین نیاز دارد. ما اطلاعات شما را ذخیره نمی‌کنیم.</string>
+    <string name="grant">اعطا</string>
+    <string name="cancel">لغو</string>
+    <string name="permissions_denied">مجوزها رد شد</string>
+    <string name="valid_number">شماره معتبر</string>
+    <string name="invalid_number">شماره نامعتبر</string>
+    <string name="sending_to">در حال ارسال به %1$d گیرنده…</string>
+    <string name="message_empty">پیام خالی است</string>
+    <string name="no_valid_recipients">هیچ گیرنده معتبری وجود ندارد</string>
+    <string name="sent_to_recipients">ارسال شد به %1$d گیرنده</string>
+    <string name="segments_count">%1$d بخش (%2$d کاراکتر باقی مانده)</string>
+    <string name="segments_count_zero">0 بخش (0 کاراکتر)</string>
+    <string name="selected_count">%1$d انتخاب شده</string>
+    
+    <!-- SMS Status Messages -->
+    <string name="sms_sent">پیامک ارسال شد</string>
+    <string name="sms_delivered">پیامک تحویل داده شد</string>
+    <string name="sms_not_delivered">پیامک تحویل داده نشد</string>
+    <string name="sms_error_generic_failure">خطای عمومی</string>
+    <string name="sms_error_no_service">بدون سرویس</string>
+    <string name="sms_error_null_pdu">PDU خالی</string>
+    <string name="sms_error_radio_off">رادیو خاموش</string>
+    <string name="sms_error_unknown">خطای ناشناخته</string>
+    
+    <!-- Bulk Send Confirmation -->
+    <string name="bulk_send_title">تأیید ارسال گروهی پیامک</string>
+    <string name="bulk_send_message">شما در حال ارسال پیامک به %1$d گیرنده هستید.\n\nتخمین تعداد بخش‌های پیامک: %2$d\n\n⚠️ هزینه استاندارد اپراتور برای هر بخش پیامک ارسالی اعمال خواهد شد.\n\nآیا می‌خواهید ادامه دهید؟</string>
+    <string name="bulk_send_confirm">ارسال</string>
+    <string name="bulk_send_cancel">لغو</string>
+    
+    <!-- Error Messages -->
+    <string name="error_sending_sms">خطا در ارسال پیامک: %1$s</string>
+    <string name="error_permission_denied">مجوز SMS رد شد. امکان ارسال پیامک وجود ندارد.</string>
+    <string name="error_unknown">خطای ناشناخته</string>
+    <string name="send_partial_success">%1$s (%2$d ناموفق)</string>
+    
+    <!-- Language & Settings -->
+    <string name="language">زبان</string>
+    <string name="language_english">English</string>
+    <string name="language_persian">فارسی</string>
+    <string name="change_language">تغییر زبان</string>
+    
+    <!-- About -->
+    <string name="about">درباره</string>
+    <string name="about_title">درباره برنامه</string>
+    <string name="app_version">نسخه</string>
+    <string name="developer">توسعه‌دهنده</string>
+    <string name="developer_name">مصطفی افرازی</string>
+    <string name="privacy_statement">این برنامه هیچ اطلاعاتی را جمع‌آوری یا ذخیره نمی‌کند. تمام پیامک‌ها مستقیماً از دستگاه شما ارسال می‌شوند.</string>
+    
+    <!-- Share -->
+    <string name="share_app">اشتراک‌گذاری برنامه</string>
+    <string name="share_app_text">برنامه ارسال پیامک بلند را از کافه‌بازار دانلود کنید:\n%1$s</string>
+    
+    <!-- Empty States -->
+    <string name="empty_no_contacts">هنوز مخاطبی بارگذاری نشده است.\nبرای شروع روی \"بارگذاری مخاطبین\" ضربه بزنید.</string>
+    <string name="empty_no_selection">هیچ گیرنده‌ای انتخاب نشده است.\nمخاطبین را انتخاب کنید یا شماره تلفن وارد کنید.</string>
+    <string name="empty_no_message">برای ارسال پیامک، پیام خود را در بالا تایپ کنید.</string>
+    <string name="loading_contacts">در حال بارگذاری مخاطبین…</string>
+    <string name="sending_sms">در حال ارسال پیامک…</string>
+</resources>
+

@@ -1,0 +1,74 @@
+<resources>
+    <string name="app_name">Long SMS Sender</string>
+    <string name="load_contacts">Load Contacts</string>
+    <string name="select_all">Select All</string>
+    <string name="clear_selection">Clear</string>
+    <string name="phone_hint">Manual Phone Number</string>
+    <string name="message_hint">Type your message here...</string>
+    <string name="paste">Paste</string>
+    <string name="send">Send</string>
+    <string name="segments_format">%1$d segments (%2$d chars left)</string>
+    <string name="status_loaded">Loaded %1$d contacts</string>
+    <string name="permission_rationale_title">Permissions Required</string>
+    <string name="permission_rationale_message">This app needs SMS permission to send messages and Contacts permission to select recipients. We do not store your data.</string>
+    <string name="grant">Grant</string>
+    <string name="cancel">Cancel</string>
+    <string name="permissions_denied">Permissions Denied</string>
+    <string name="valid_number">Valid Number</string>
+    <string name="invalid_number">Invalid Number</string>
+    <string name="sending_to">Sending to %1$d recipients...</string>
+    <string name="message_empty">Message is empty</string>
+    <string name="no_valid_recipients">No valid recipients</string>
+    <string name="sent_to_recipients">Sent to %1$d recipients</string>
+    <string name="segments_count">%1$d segments (%2$d chars left)</string>
+    <string name="segments_count_zero">0 segments (0 chars)</string>
+    <string name="selected_count">%1$d selected</string>
+    
+    <!-- SMS Status Messages -->
+    <string name="sms_sent">SMS Sent</string>
+    <string name="sms_delivered">SMS Delivered</string>
+    <string name="sms_not_delivered">SMS Not Delivered</string>
+    <string name="sms_error_generic_failure">Generic Failure</string>
+    <string name="sms_error_no_service">No Service</string>
+    <string name="sms_error_null_pdu">Null PDU</string>
+    <string name="sms_error_radio_off">Radio Off</string>
+    <string name="sms_error_unknown">Unknown Error</string>
+    
+    <!-- Bulk Send Confirmation -->
+    <string name="bulk_send_title">Confirm Bulk SMS Send</string>
+    <string name="bulk_send_message">You are about to send SMS to %1$d recipient(s).\n\nEstimated SMS parts: %2$d\n\n⚠️ Standard operator SMS charges will apply for each SMS part sent.\n\nDo you want to continue?</string>
+    <string name="bulk_send_confirm">Send</string>
+    <string name="bulk_send_cancel">Cancel</string>
+    
+    <!-- Error Messages -->
+    <string name="error_sending_sms">Error sending SMS: %1$s</string>
+    <string name="error_permission_denied">SMS permission denied. Cannot send messages.</string>
+    <string name="error_unknown">Unknown error</string>
+    <string name="send_partial_success">%1$s (%2$d failed)</string>
+    
+    <!-- Language & Settings -->
+    <string name="language">Language</string>
+    <string name="language_english">English</string>
+    <string name="language_persian">فارسی</string>
+    <string name="change_language">Change Language</string>
+    
+    <!-- About -->
+    <string name="about">About</string>
+    <string name="about_title">About App</string>
+    <string name="app_version">Version</string>
+    <string name="developer">Developer</string>
+    <string name="developer_name">Mostafa Afrouzi</string>
+    <string name="privacy_statement">This app does not collect or store any information. All SMS messages are sent directly from your device.</string>
+    
+    <!-- Share -->
+    <string name="share_app">Share App</string>
+    <string name="share_app_text">Download Long SMS Sender app from CafeBazaar:\n%1$s</string>
+    
+    <!-- Empty States -->
+    <string name="empty_no_contacts">No contacts loaded yet.\nTap \"Load Contacts\" to get started.</string>
+    <string name="empty_no_selection">No recipients selected.\nSelect contacts or enter a phone number.</string>
+    <string name="empty_no_message">Type your message above to send SMS.</string>
+    <string name="loading_contacts">Loading contacts...</string>
+    <string name="sending_sms">Sending SMS...</string>
+</resources>
+
