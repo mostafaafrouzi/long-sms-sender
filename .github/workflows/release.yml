@@ -37,13 +37,25 @@ jobs:
           echo "Decoding keystore..."
           echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > keystore.jks
           
+          # Find zipalign and apksigner in Android SDK
+          ZIPALIGN=$(find $ANDROID_HOME/build-tools -name zipalign | head -n 1)
+          APKSIGNER=$(find $ANDROID_HOME/build-tools -name apksigner | head -n 1)
+          
+          if [ -z "$ZIPALIGN" ] || [ -z "$APKSIGNER" ]; then
+            echo "Error: zipalign or apksigner not found in Android SDK"
+            exit 1
+          fi
+          
+          echo "Using zipalign: $ZIPALIGN"
+          echo "Using apksigner: $APKSIGNER"
+          
           echo "Aligning APK before signing..."
-          zipalign -v 4 \
+          $ZIPALIGN -v 4 \
             app/build/outputs/apk/release/app-release-unsigned.apk \
             app/build/outputs/apk/release/app-release-aligned.apk
           
           echo "Signing APK..."
-          apksigner sign --ks keystore.jks \
+          $APKSIGNER sign --ks keystore.jks \
             --ks-pass pass:"${{ secrets.KEYSTORE_PASSWORD }}" \
             --key-pass pass:"${{ secrets.KEY_PASSWORD }}" \
             --ks-key-alias "${{ secrets.KEY_ALIAS }}" \
@@ -51,7 +63,7 @@ jobs:
             app/build/outputs/apk/release/app-release-aligned.apk
           
           echo "Verifying signature..."
-          apksigner verify --verbose app/build/outputs/apk/release/app-release-signed.apk
+          $APKSIGNER verify --verbose app/build/outputs/apk/release/app-release-signed.apk
           
           rm -f keystore.jks app/build/outputs/apk/release/app-release-aligned.apk
           echo "APK signed successfully!"
