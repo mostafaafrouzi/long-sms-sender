@@ -86,8 +86,8 @@ class MainActivity : AppCompatActivity() {
 
         // Register Receiver
         val filter = IntentFilter().apply {
-            addAction("SMS_SENT")
-            addAction("SMS_DELIVERED")
+                addAction("SMS_SENT")
+                addAction("SMS_DELIVERED")
         }
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
             // RECEIVER_NOT_EXPORTED = 0x00000002
@@ -126,7 +126,7 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btnLanguage).setOnClickListener {
             showLanguageDialog()
         }
-        
+
         findViewById<ImageButton>(R.id.btnTheme).setOnClickListener {
             toggleTheme()
         }
@@ -232,7 +232,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        
+
         viewModel.bulkSendConfirmation.observe(this) { confirmation ->
             confirmation?.let {
                 showBulkSendConfirmationDialog(it)
@@ -273,7 +273,7 @@ class MainActivity : AppCompatActivity() {
             txtStatus.text = status
         }
     }
-    
+
     private var sendStatusDialog: AlertDialog? = null
     private var sendProgressDialog: AlertDialog? = null
     private var countdownTimer: android.os.CountDownTimer? = null
@@ -802,7 +802,7 @@ class MainActivity : AppCompatActivity() {
             if (grantResults.isNotEmpty() && grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
                 // Permissions granted, load contacts if dialog is showing
                 if (contactsDialog?.isShowing == true) {
-                    viewModel.loadContacts()
+                viewModel.loadContacts()
                 }
             } else {
                 showSnackbar(getString(R.string.permissions_denied), Snackbar.LENGTH_LONG)
