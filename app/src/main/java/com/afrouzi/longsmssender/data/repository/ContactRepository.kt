@@ -1,9 +1,9 @@
-package com.mostafaafrouzi.longsmssender.data.repository
+package com.afrouzi.longsmssender.data.repository
 
 import android.content.Context
 import android.provider.ContactsContract
-import com.mostafaafrouzi.longsmssender.data.model.Contact
-import com.mostafaafrouzi.longsmssender.utils.NumberValidator
+import com.afrouzi.longsmssender.data.model.Contact
+import com.afrouzi.longsmssender.utils.NumberValidator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

@@ -1,4 +1,4 @@
-package com.mostafaafrouzi.longsmssender.ui
+package com.afrouzi.longsmssender.ui
 
 import android.content.Context
 import android.content.pm.PackageManager
@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import com.mostafaafrouzi.longsmssender.R
-import com.mostafaafrouzi.longsmssender.utils.LocaleManager
+import com.afrouzi.longsmssender.R
+import com.afrouzi.longsmssender.utils.LocaleManager
 
 class AboutActivity : AppCompatActivity() {
     

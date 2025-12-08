@@ -1,4 +1,4 @@
-package com.mostafaafrouzi.longsmssender.utils
+package com.afrouzi.longsmssender.utils
 
 object NumberValidator {
 

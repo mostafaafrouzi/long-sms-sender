@@ -1,8 +1,8 @@
-package com.mostafaafrouzi.longsmssender.ui
+package com.afrouzi.longsmssender.ui
 
 import android.widget.SectionIndexer
 import androidx.recyclerview.widget.RecyclerView
-import com.mostafaafrouzi.longsmssender.data.model.Contact
+import com.afrouzi.longsmssender.data.model.Contact
 
 abstract class SectionIndexerAdapter<T : RecyclerView.ViewHolder>(
     private val alphabetIndexer: AlphabetIndexer

@@ -1,4 +1,4 @@
-package com.mostafaafrouzi.longsmssender.ui
+package com.afrouzi.longsmssender.ui
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,8 +7,8 @@ import android.widget.SectionIndexer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.mostafaafrouzi.longsmssender.data.model.Contact
-import com.mostafaafrouzi.longsmssender.databinding.ItemContactBinding
+import com.afrouzi.longsmssender.data.model.Contact
+import com.afrouzi.longsmssender.databinding.ItemContactBinding
 
 class ContactAdapter(
     private val onItemClick: (Contact) -> Unit

@@ -1,4 +1,4 @@
-package com.mostafaafrouzi.longsmssender.utils
+package com.afrouzi.longsmssender.utils
 
 import android.content.Context
 import kotlinx.coroutines.Dispatchers

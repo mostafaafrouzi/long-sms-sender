@@ -1,4 +1,4 @@
-package com.mostafaafrouzi.longsmssender.ui
+package com.afrouzi.longsmssender.ui
 
 import android.content.Context
 import android.graphics.Canvas

@@ -1,4 +1,4 @@
-package com.mostafaafrouzi.longsmssender.ui
+package com.afrouzi.longsmssender.ui
 
 import android.content.BroadcastReceiver
 import android.content.ClipboardManager
@@ -24,13 +24,13 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
-import com.mostafaafrouzi.longsmssender.R
-import com.mostafaafrouzi.longsmssender.data.model.Contact
-import com.mostafaafrouzi.longsmssender.ui.BulkSendConfirmation
-import com.mostafaafrouzi.longsmssender.utils.LocaleManager
-import com.mostafaafrouzi.longsmssender.utils.PermissionManager
-import com.mostafaafrouzi.longsmssender.utils.SmsBroadcastReceiver
-import com.mostafaafrouzi.longsmssender.utils.ThemeManager
+import com.afrouzi.longsmssender.R
+import com.afrouzi.longsmssender.data.model.Contact
+import com.afrouzi.longsmssender.ui.BulkSendConfirmation
+import com.afrouzi.longsmssender.utils.LocaleManager
+import com.afrouzi.longsmssender.utils.PermissionManager
+import com.afrouzi.longsmssender.utils.SmsBroadcastReceiver
+import com.afrouzi.longsmssender.utils.ThemeManager
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -764,13 +764,14 @@ class MainActivity : AppCompatActivity() {
     
     private fun shareApp() {
         val language = LocaleManager.getCurrentLanguage(this)
+        val cafeBazaarUrl = "https://cafebazaar.ir/app/com.afrouzi.longsmssender"
         val githubUrl = if (language == "fa") {
             "https://github.com/mostafaafrouzi/long-sms-sender/blob/main/README.fa.md"
         } else {
             "https://github.com/mostafaafrouzi/long-sms-sender"
         }
         
-        val shareText = getString(R.string.share_app_text_github, githubUrl)
+        val shareText = getString(R.string.share_app_text, cafeBazaarUrl, githubUrl)
         val sendIntent = Intent().apply {
             action = Intent.ACTION_SEND
             putExtra(Intent.EXTRA_TEXT, shareText)

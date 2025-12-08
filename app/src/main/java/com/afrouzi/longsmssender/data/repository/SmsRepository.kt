@@ -1,10 +1,10 @@
-package com.mostafaafrouzi.longsmssender.data.repository
+package com.afrouzi.longsmssender.data.repository
 
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.telephony.SmsManager
-import com.mostafaafrouzi.longsmssender.data.model.SmsResult
+import com.afrouzi.longsmssender.data.model.SmsResult
 
 class SmsRepository(private val context: Context) {
 

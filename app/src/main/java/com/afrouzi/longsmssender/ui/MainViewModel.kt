@@ -1,4 +1,4 @@
-package com.mostafaafrouzi.longsmssender.ui
+package com.afrouzi.longsmssender.ui
 
 import android.app.Application
 import android.telephony.SmsMessage
@@ -6,13 +6,13 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.mostafaafrouzi.longsmssender.R
-import com.mostafaafrouzi.longsmssender.data.model.Contact
-import com.mostafaafrouzi.longsmssender.data.model.SmsResult
-import com.mostafaafrouzi.longsmssender.data.repository.ContactRepository
-import com.mostafaafrouzi.longsmssender.data.repository.SmsRepository
-import com.mostafaafrouzi.longsmssender.utils.LocaleManager
-import com.mostafaafrouzi.longsmssender.utils.NumberValidator
+import com.afrouzi.longsmssender.R
+import com.afrouzi.longsmssender.data.model.Contact
+import com.afrouzi.longsmssender.data.model.SmsResult
+import com.afrouzi.longsmssender.data.repository.ContactRepository
+import com.afrouzi.longsmssender.data.repository.SmsRepository
+import com.afrouzi.longsmssender.utils.LocaleManager
+import com.afrouzi.longsmssender.utils.NumberValidator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay

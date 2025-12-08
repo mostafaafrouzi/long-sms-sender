@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.mostafaafrouzi.longsmssender"
+    namespace = "com.afrouzi.longsmssender"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.mostafaafrouzi.longsmssender"
+        applicationId = "com.afrouzi.longsmssender"
         minSdk = 23
         targetSdk = 34
         versionCode = 1

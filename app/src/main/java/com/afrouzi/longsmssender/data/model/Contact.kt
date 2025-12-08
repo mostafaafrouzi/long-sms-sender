@@ -1,4 +1,4 @@
-package com.mostafaafrouzi.longsmssender.data.model
+package com.afrouzi.longsmssender.data.model
 
 data class Contact(
     val id: String,

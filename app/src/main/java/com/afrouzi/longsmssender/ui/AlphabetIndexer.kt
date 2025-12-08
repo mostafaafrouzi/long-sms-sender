@@ -1,6 +1,6 @@
-package com.mostafaafrouzi.longsmssender.ui
+package com.afrouzi.longsmssender.ui
 
-import com.mostafaafrouzi.longsmssender.data.model.Contact
+import com.afrouzi.longsmssender.data.model.Contact
 import java.util.*
 
 class AlphabetIndexer(private val contacts: List<Contact>) {

@@ -3,25 +3,25 @@
 # proguardFiles setting in build.gradle.
 
 # Keep application class
--keep class com.mostafaafrouzi.longsmssender.LongSmsApp { *; }
+-keep class com.afrouzi.longsmssender.LongSmsApp { *; }
 
 # Keep all Activities
--keep class com.mostafaafrouzi.longsmssender.ui.** { *; }
+-keep class com.afrouzi.longsmssender.ui.** { *; }
 
 # Keep ViewModels
--keep class com.mostafaafrouzi.longsmssender.ui.MainViewModel { *; }
+-keep class com.afrouzi.longsmssender.ui.MainViewModel { *; }
 
 # Keep data models
--keep class com.mostafaafrouzi.longsmssender.data.model.** { *; }
+-keep class com.afrouzi.longsmssender.data.model.** { *; }
 
 # Keep repositories
--keep class com.mostafaafrouzi.longsmssender.data.repository.** { *; }
+-keep class com.afrouzi.longsmssender.data.repository.** { *; }
 
 # Keep utility classes
--keep class com.mostafaafrouzi.longsmssender.utils.** { *; }
+-keep class com.afrouzi.longsmssender.utils.** { *; }
 
 # Keep BroadcastReceiver
--keep class com.mostafaafrouzi.longsmssender.utils.SmsBroadcastReceiver { *; }
+-keep class com.afrouzi.longsmssender.utils.SmsBroadcastReceiver { *; }
 
 # Keep Parcelable implementations
 -keepclassmembers class * implements android.os.Parcelable {

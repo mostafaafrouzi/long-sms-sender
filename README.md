@@ -182,7 +182,7 @@ If signing is not configured, the workflow will create an unsigned APK.
 
 Download the app from CafeBazaar (Iranian app store):
 
-🔗 [Download from CafeBazaar](https://cafebazaar.ir/app/com.mostafaafrouzi.longsmssender)
+🔗 [Download from CafeBazaar](https://cafebazaar.ir/app/com.afrouzi.longsmssender)
 
 *Note: Link will be available after app submission to CafeBazaar*
 

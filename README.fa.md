@@ -182,7 +182,7 @@
 
 برنامه را از کافه‌بازار (فروشگاه اپلیکیشن ایرانی) دانلود کنید:
 
-🔗 [دانلود از کافه‌بازار](https://cafebazaar.ir/app/com.mostafaafrouzi.longsmssender)
+🔗 [دانلود از کافه‌بازار](https://cafebazaar.ir/app/com.afrouzi.longsmssender)
 
 *توجه: لینک پس از ارسال برنامه به کافه‌بازار در دسترس خواهد بود*
 
