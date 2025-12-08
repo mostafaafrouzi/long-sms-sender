@@ -18,9 +18,14 @@ class ContactAdapter(
     private var alphabetIndexer: AlphabetIndexer? = null
 
     fun updateSelection(newSelection: Set<String>) {
+        // Only update if selection actually changed
+        if (selectedIds == newSelection) {
+            return
+        }
         selectedIds = newSelection
         // Notify all items that selection might have changed
-        notifyItemRangeChanged(0, currentList.size)
+        // Use notifyDataSetChanged for better performance when many items change
+        notifyDataSetChanged()
     }
     
     fun updateAlphabetIndexer(contacts: List<Contact>) {

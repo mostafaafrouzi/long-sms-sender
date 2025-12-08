@@ -13,7 +13,11 @@ import com.mostafaafrouzi.longsmssender.data.repository.ContactRepository
 import com.mostafaafrouzi.longsmssender.data.repository.SmsRepository
 import com.mostafaafrouzi.longsmssender.utils.LocaleManager
 import com.mostafaafrouzi.longsmssender.utils.NumberValidator
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 data class BulkSendConfirmation(
     val recipientCount: Int,
@@ -57,6 +61,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private var pendingRecipients: List<String> = emptyList()
     private var pendingMessage: String = ""
     
+    // Debounce job for updateRecipientsCount
+    private var updateRecipientsJob: Job? = null
+    
     data class SendProgress(
         val currentRecipient: Int,
         val totalRecipients: Int,
@@ -99,6 +106,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         _selectedIds.value = emptySet()
     }
     
+    fun setSelectedIds(ids: Set<String>) {
+        _selectedIds.value = ids
+    }
+    
     fun clearSendResult() {
         _sendResult.value = null
     }
@@ -125,34 +136,45 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
     
     fun updateRecipientsCount(manualNumber: String) {
-        // Run in background to prevent UI freezing
-        viewModelScope.launch {
-            val recipients = ArrayList<String>()
+        // Cancel previous job if exists (debounce)
+        updateRecipientsJob?.cancel()
+        
+        // Run in background to prevent UI freezing with debounce
+        updateRecipientsJob = viewModelScope.launch {
+            // Debounce: wait 300ms before processing to avoid multiple calls
+            delay(300)
             
-            // Parse manual numbers from multiline input
-            // Filter out empty lines
-            val lines = manualNumber.split("\n", "\r\n")
-            lines.forEach { line ->
-                val trimmedLine = line.trim()
-                // Only process non-empty lines
-                if (trimmedLine.isNotEmpty() && NumberValidator.isValidPhoneNumber(trimmedLine)) {
-                    val normalized = NumberValidator.normalizeNumber(trimmedLine)
-                    if (normalized.isNotEmpty() && !recipients.contains(normalized)) {
-                        recipients.add(normalized)
+            // Use Dispatchers.Default for CPU-intensive work
+            val recipients = withContext(Dispatchers.Default) {
+                val recipientsSet = HashSet<String>() // Use HashSet for O(1) lookup
+                
+                // Parse manual numbers from multiline input
+                // Filter out empty lines
+                val lines = manualNumber.split("\n", "\r\n")
+                lines.forEach { line ->
+                    val trimmedLine = line.trim()
+                    // Only process non-empty lines
+                    if (trimmedLine.isNotEmpty() && NumberValidator.isValidPhoneNumber(trimmedLine)) {
+                        val normalized = NumberValidator.normalizeNumber(trimmedLine)
+                        if (normalized.isNotEmpty()) {
+                            recipientsSet.add(normalized)
+                        }
                     }
                 }
-            }
-            
-            // Add selected contacts
-            val selected = _selectedIds.value.orEmpty()
-            _contacts.value?.filter { selected.contains(it.id) }?.forEach { 
-                val normalized = it.normalizedNumber
-                if (!recipients.contains(normalized)) {
-                    recipients.add(normalized)
+                
+                // Add selected contacts - optimized with HashSet lookup
+                val selected = _selectedIds.value.orEmpty()
+                val selectedSet = selected.toSet() // Convert to Set for O(1) lookup
+                _contacts.value?.forEach { contact ->
+                    if (selectedSet.contains(contact.id)) {
+                        recipientsSet.add(contact.normalizedNumber)
+                    }
                 }
+                
+                recipientsSet.toList() // Convert back to list
             }
             
-            // Update status based on recipient count
+            // Update status based on recipient count (on main thread)
             when {
                 recipients.isEmpty() -> {
                     _sendStatus.postValue(getLocalizedString(R.string.recipients_count_zero))

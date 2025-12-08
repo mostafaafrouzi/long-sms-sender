@@ -87,69 +87,73 @@
             android:textColor="?attr/colorOnSurface"
             android:alpha="0.8"
             android:lineSpacingExtra="4dp"
-            android:gravity="start"
+            android:gravity="center"
+            android:layout_marginBottom="8dp"
+            tools:text="Web &amp; App Design/Development, SEO &amp; Digital Marketing" />
+
+        <TextView
+            android:id="@+id/txtDeveloperDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:textColor="?attr/colorOnSurface"
+            android:alpha="0.7"
+            android:lineSpacingExtra="4dp"
+            android:gravity="center"
             android:layout_marginBottom="16dp"
-            tools:text="Web &amp; Software Developer" />
+            tools:text="I\'m Mostafa Afrouzi, a web and app designer..." />
 
         <!-- Links Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:gravity="center"
             android:layout_marginBottom="16dp">
 
             <!-- Website Link -->
             <Button
                 android:id="@+id/btnWebsite"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="afrouzi.ir"
                 android:drawableLeft="@drawable/ic_website"
                 android:drawableStart="@drawable/ic_website"
                 android:drawablePadding="8dp"
-                android:gravity="center|center_vertical"
+                android:gravity="center"
                 android:textAllCaps="false"
                 android:singleLine="true"
-                android:ellipsize="end"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_marginEnd="4dp" />
+                android:layout_marginBottom="8dp" />
 
             <!-- GitHub Link -->
             <Button
                 android:id="@+id/btnGitHub"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="mostafaafrouzi"
+                android:text="github.com/mostafaafrouzi"
                 android:drawableLeft="@drawable/ic_github"
                 android:drawableStart="@drawable/ic_github"
                 android:drawablePadding="8dp"
-                android:gravity="center|center_vertical"
+                android:gravity="center"
                 android:textAllCaps="false"
                 android:singleLine="true"
-                android:ellipsize="end"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="4dp" />
+                android:layout_marginBottom="8dp" />
 
             <!-- LinkedIn Link -->
             <Button
                 android:id="@+id/btnLinkedIn"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="mostafaafrouzi"
+                android:text="linkedin.com/in/mostafaafrouzi"
                 android:drawableLeft="@drawable/ic_linkedin"
                 android:drawableStart="@drawable/ic_linkedin"
                 android:drawablePadding="8dp"
-                android:gravity="center|center_vertical"
+                android:gravity="center"
                 android:textAllCaps="false"
                 android:singleLine="true"
-                android:ellipsize="end"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_marginStart="4dp" />
+                style="@style/Widget.MaterialComponents.Button.TextButton" />
 
         </LinearLayout>
 

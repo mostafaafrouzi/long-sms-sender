@@ -81,7 +81,8 @@
     <string name="app_version">Version</string>
     <string name="developer">Developer</string>
     <string name="developer_name">Mostafa Afrouzi</string>
-    <string name="developer_info">Web &amp; Software Developer</string>
+    <string name="developer_info">Web &amp; App Design/Development, SEO &amp; Digital Marketing</string>
+    <string name="developer_description">I\'m Mostafa Afrouzi, a web and app designer and developer focused on SEO, Google Ads, and marketing automation. I approach projects with a business mindset, clean UX, and robust engineering so the outcome isn\'t just a website or app, but a real engine for business growth.</string>
     <string name="share_app_text_github">Do you have issues with SMS being converted to MMS after three pages? With this app, you can send long text messages as SMS without automatic MMS conversion, send to one or multiple recipients, with no limitations on message length and without the common issues caused by carriers or restrictions on some Android devices.\n\n%1$s</string>
     <string name="privacy_statement">This app does not collect or store any information. All SMS messages are sent directly from your device.</string>
     

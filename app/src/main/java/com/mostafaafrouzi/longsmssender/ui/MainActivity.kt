@@ -182,7 +182,25 @@ class MainActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val isSending = viewModel.isSending.value ?: false
                 if (!isSending) {
-                    viewModel.updateRecipientsCount(s.toString())
+                    val newText = s.toString()
+                    // If user manually edits the field and it doesn't match selected contacts, clear selection
+                    val currentSelected = viewModel.selectedIds.value.orEmpty()
+                    if (currentSelected.isNotEmpty() && newText.isNotEmpty()) {
+                        // Check if the new text matches the selected contacts
+                        val selectedNumbers = viewModel.contacts.value
+                            ?.filter { currentSelected.contains(it.id) }
+                            ?.map { it.phoneNumber }
+                            ?.joinToString("\n") ?: ""
+                        
+                        // If the new text doesn't match selected contacts, clear selection
+                        if (newText.trim() != selectedNumbers.trim()) {
+                            viewModel.clearSelection()
+                        }
+                    } else if (newText.isEmpty() && currentSelected.isNotEmpty()) {
+                        // If user clears the field, clear selection
+                        viewModel.clearSelection()
+                    }
+                    viewModel.updateRecipientsCount(newText)
                 }
             }
             override fun afterTextChanged(s: Editable?) {}
@@ -522,13 +540,8 @@ class MainActivity : AppCompatActivity() {
                     .map { it.phoneNumber }
                     .joinToString("\n")
                 
-                // Update ViewModel selectedIds
-                viewModel.clearSelection()
-                selectedContacts.forEach { contactId ->
-                    currentFiltered.find { it.id == contactId }?.let { contact ->
-                        viewModel.toggleSelection(contact)
-                    }
-                }
+                // Update ViewModel selectedIds - set all at once to avoid multiple observer calls
+                viewModel.setSelectedIds(selectedContacts)
                 
                 if (selectedNumbers.isNotEmpty()) {
                     edtPhone.setText(selectedNumbers)
@@ -651,6 +664,7 @@ class MainActivity : AppCompatActivity() {
         val txtDeveloper = dialogView.findViewById<TextView>(R.id.txtDeveloper)
         val txtDeveloperName = dialogView.findViewById<TextView>(R.id.txtDeveloperName)
         val txtDeveloperInfo = dialogView.findViewById<TextView>(R.id.txtDeveloperInfo)
+        val txtDeveloperDescription = dialogView.findViewById<TextView>(R.id.txtDeveloperDescription)
         val txtOpenSource = dialogView.findViewById<TextView>(R.id.txtOpenSource)
         val btnWebsite = dialogView.findViewById<Button>(R.id.btnWebsite)
         val btnGitHub = dialogView.findViewById<Button>(R.id.btnGitHub)
@@ -676,18 +690,21 @@ class MainActivity : AppCompatActivity() {
         txtDeveloper.text = getString(R.string.developer)
         txtDeveloperName.text = getString(R.string.developer_name)
         txtDeveloperInfo.text = getString(R.string.developer_info)
+        txtDeveloperDescription.text = getString(R.string.developer_description)
         txtOpenSource.text = getString(R.string.about_open_source)
         
         // Center align for Persian
         if (isRtl) {
             txtDeveloper.gravity = android.view.Gravity.CENTER
             txtDeveloperName.gravity = android.view.Gravity.CENTER
+            txtDeveloperInfo.gravity = android.view.Gravity.CENTER
+            txtDeveloperDescription.gravity = android.view.Gravity.CENTER
         }
         
-        // Set link buttons with icons
+        // Set link buttons with full URLs
         btnWebsite.text = "afrouzi.ir"
-        btnGitHub.text = "mostafaafrouzi"
-        btnLinkedIn.text = "mostafaafrouzi"
+        btnGitHub.text = "github.com/mostafaafrouzi"
+        btnLinkedIn.text = "linkedin.com/in/mostafaafrouzi"
         
         // Tint drawables to match text color
         val websiteDrawable = ContextCompat.getDrawable(this, R.drawable.ic_website)?.mutate()

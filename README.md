@@ -2,6 +2,8 @@
 
 [🇮🇷 فارسی](README.fa.md) | [🇺🇸 English](README.md)
 
+![Long SMS Sender](long-sms-sender.png)
+
 A production-grade Android application that allows users to send very long text messages as real multi-part SMS, **absolutely preventing conversion to MMS**.
 
 ## 📱 What This App Does

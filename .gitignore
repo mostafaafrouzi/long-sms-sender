@@ -98,3 +98,7 @@ Thumbs.db
 # App zip files
 *.zip
 app.zip
+
+# Logcat files
+logcat.txt
+**/logcat.txt
