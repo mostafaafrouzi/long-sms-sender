@@ -30,13 +30,14 @@ Unlike default messaging apps that convert long messages to MMS (which costs mor
 
 **This app does NOT collect, store, or transmit any personal data.**
 
-- ✅ No internet permission required
+- ✅ **No internet permission** - App works completely offline
 - ✅ No analytics or tracking
 - ✅ No ads
 - ✅ No data collection
 - ✅ All SMS messages are sent directly from your device
 - ✅ Contact data is only used locally for recipient selection
 - ✅ No data is stored on external servers
+- ✅ All information in About dialog is embedded (no network requests)
 
 Your privacy is our priority. All operations happen locally on your device.
 
@@ -196,17 +197,22 @@ Download the app from CafeBazaar (Iranian app store):
 
 - ✅ Send unlimited length SMS as multi-part
 - ✅ Prevent MMS conversion
-- ✅ Contact selection (single/multiple/all)
-- ✅ Manual phone number input
+- ✅ Contact selection (single/multiple/all) with search
+- ✅ Manual phone number input (multi-line support)
 - ✅ Fast paste button
 - ✅ Real-time segment counter
-- ✅ Send status tracking
+- ✅ Send status tracking with detailed dialogs
 - ✅ Bulk send confirmation
+- ✅ Progress dialog for long sends
 - ✅ Persian & English language support
+- ✅ Quick language switch button (EN/فا)
 - ✅ RTL (Right-to-Left) layout support
-- ✅ Dark mode
+- ✅ Dark mode, Light mode, and System default theme
+- ✅ Theme change notifications
+- ✅ Alphabetical scroller for contacts
 - ✅ Tablet & landscape support
 - ✅ No ads, no analytics, no tracking
+- ✅ No internet permission required
 
 ## 🤝 Contributing
 

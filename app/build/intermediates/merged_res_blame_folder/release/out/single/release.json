@@ -1,0 +1,106 @@
+[
+    {
+        "merged": "com.mostafaafrouzi.longsmssender.app-merged_res-36:/xml_data_extraction_rules.xml.flat",
+        "source": "com.mostafaafrouzi.longsmssender.app-main-37:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.mostafaafrouzi.longsmssender.app-merged_res-36:/drawable_ic_info.xml.flat",
+        "source": "com.mostafaafrouzi.longsmssender.app-main-37:/drawable/ic_info.xml"
+    },
+    {
+        "merged": "com.mostafaafrouzi.longsmssender.app-merged_res-36:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.mostafaafrouzi.longsmssender.app-main-37:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.mostafaafrouzi.longsmssender.app-merged_res-36:/drawable_ic_linkedin.xml.flat",
+        "source": "com.mostafaafrouzi.longsmssender.app-main-37:/drawable/ic_linkedin.xml"
+    },
+    {
+        "merged": "com.mostafaafrouzi.longsmssender.app-merged_res-36:/drawable_ic_language.xml.flat",
+        "source": "com.mostafaafrouzi.longsmssender.app-main-37:/drawable/ic_language.xml"
+    },
+    {
+        "merged": "com.mostafaafrouzi.longsmssender.app-merged_res-36:/drawable_ic_share.xml.flat",
+        "source": "com.mostafaafrouzi.longsmssender.app-main-37:/drawable/ic_share.xml"
+    },
+    {
+        "merged": "com.mostafaafrouzi.longsmssender.app-merged_res-36:/drawable_ic_link.xml.flat",
+        "source": "com.mostafaafrouzi.longsmssender.app-main-37:/drawable/ic_link.xml"
+    },
+    {
+        "merged": "com.mostafaafrouzi.longsmssender.app-merged_res-36:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.mostafaafrouzi.longsmssender.app-main-37:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.mostafaafrouzi.longsmssender.app-merged_res-36:/drawable_ic_website.xml.flat",
+        "source": "com.mostafaafrouzi.longsmssender.app-main-37:/drawable/ic_website.xml"
+    },
+    {
+        "merged": "com.mostafaafrouzi.longsmssender.app-merged_res-36:/drawable_ic_github.xml.flat",
+        "source": "com.mostafaafrouzi.longsmssender.app-main-37:/drawable/ic_github.xml"
+    },
+    {
+        "merged": "com.mostafaafrouzi.longsmssender.app-merged_res-36:/layout_dialog_contacts.xml.flat",
+        "source": "com.mostafaafrouzi.longsmssender.app-main-37:/layout/dialog_contacts.xml"
+    },
+    {
+        "merged": "com.mostafaafrouzi.longsmssender.app-merged_res-36:/drawable_ic_light_mode.xml.flat",
+        "source": "com.mostafaafrouzi.longsmssender.app-main-37:/drawable/ic_light_mode.xml"
+    },
+    {
+        "merged": "com.mostafaafrouzi.longsmssender.app-merged_res-36:/layout_dialog_about.xml.flat",
+        "source": "com.mostafaafrouzi.longsmssender.app-main-37:/layout/dialog_about.xml"
+    },
+    {
+        "merged": "com.mostafaafrouzi.longsmssender.app-merged_res-36:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.mostafaafrouzi.longsmssender.app-main-37:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.mostafaafrouzi.longsmssender.app-merged_res-36:/layout_dialog_send_progress.xml.flat",
+        "source": "com.mostafaafrouzi.longsmssender.app-main-37:/layout/dialog_send_progress.xml"
+    },
+    {
+        "merged": "com.mostafaafrouzi.longsmssender.app-merged_res-36:/layout_activity_about.xml.flat",
+        "source": "com.mostafaafrouzi.longsmssender.app-main-37:/layout/activity_about.xml"
+    },
+    {
+        "merged": "com.mostafaafrouzi.longsmssender.app-merged_res-36:/drawable_ripple_paste_button.xml.flat",
+        "source": "com.mostafaafrouzi.longsmssender.app-main-37:/drawable/ripple_paste_button.xml"
+    },
+    {
+        "merged": "com.mostafaafrouzi.longsmssender.app-merged_res-36:/layout_activity_main.xml.flat",
+        "source": "com.mostafaafrouzi.longsmssender.app-main-37:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.mostafaafrouzi.longsmssender.app-merged_res-36:/drawable_ic_paste.xml.flat",
+        "source": "com.mostafaafrouzi.longsmssender.app-main-37:/drawable/ic_paste.xml"
+    },
+    {
+        "merged": "com.mostafaafrouzi.longsmssender.app-merged_res-36:/layout_item_contact.xml.flat",
+        "source": "com.mostafaafrouzi.longsmssender.app-main-37:/layout/item_contact.xml"
+    },
+    {
+        "merged": "com.mostafaafrouzi.longsmssender.app-merged_res-36:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.mostafaafrouzi.longsmssender.app-main-37:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.mostafaafrouzi.longsmssender.app-merged_res-36:/layout-sw600dp_activity_main.xml.flat",
+        "source": "com.mostafaafrouzi.longsmssender.app-main-37:/layout-sw600dp/activity_main.xml"
+    },
+    {
+        "merged": "com.mostafaafrouzi.longsmssender.app-merged_res-36:/drawable_ic_translate.xml.flat",
+        "source": "com.mostafaafrouzi.longsmssender.app-main-37:/drawable/ic_translate.xml"
+    },
+    {
+        "merged": "com.mostafaafrouzi.longsmssender.app-merged_res-36:/xml_backup_rules.xml.flat",
+        "source": "com.mostafaafrouzi.longsmssender.app-main-37:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.mostafaafrouzi.longsmssender.app-merged_res-36:/layout_dialog_send_status.xml.flat",
+        "source": "com.mostafaafrouzi.longsmssender.app-main-37:/layout/dialog_send_status.xml"
+    },
+    {
+        "merged": "com.mostafaafrouzi.longsmssender.app-merged_res-36:/drawable_ic_dark_mode.xml.flat",
+        "source": "com.mostafaafrouzi.longsmssender.app-main-37:/drawable/ic_dark_mode.xml"
+    }
+]

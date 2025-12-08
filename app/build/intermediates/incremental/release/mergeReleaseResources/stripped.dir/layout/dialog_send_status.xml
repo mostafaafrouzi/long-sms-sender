@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:minWidth="300dp">
+
+    <TextView
+        android:id="@+id/txtStatusMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="?attr/colorOnSurface"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"
+        android:lineSpacingExtra="4dp"
+        tools:text="Your message with 4 segments has been successfully sent to 3 selected recipients." />
+
+    <Button
+        android:id="@+id/btnOk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ok"
+        android:textAllCaps="false" />
+
+</LinearLayout>

@@ -1,7 +1,6 @@
 package com.mostafaafrouzi.longsmssender.ui
 
 import android.app.Application
-import android.content.Context
 import android.telephony.SmsMessage
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -12,6 +11,7 @@ import com.mostafaafrouzi.longsmssender.data.model.Contact
 import com.mostafaafrouzi.longsmssender.data.model.SmsResult
 import com.mostafaafrouzi.longsmssender.data.repository.ContactRepository
 import com.mostafaafrouzi.longsmssender.data.repository.SmsRepository
+import com.mostafaafrouzi.longsmssender.utils.LocaleManager
 import com.mostafaafrouzi.longsmssender.utils.NumberValidator
 import kotlinx.coroutines.launch
 
@@ -25,7 +25,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository = ContactRepository(application)
     private val smsRepository = SmsRepository(application)
-    private val context: Context = application
+    private val applicationContext: Application = application
 
     private val _contacts = MutableLiveData<List<Contact>>()
     val contacts: LiveData<List<Contact>> = _contacts
@@ -45,11 +45,31 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val _sendStatus = MutableLiveData<String>()
     val sendStatus: LiveData<String> = _sendStatus
     
+    private val _sendResult = MutableLiveData<SendResult?>()
+    val sendResult: LiveData<SendResult?> = _sendResult
+    
+    private val _sendProgress = MutableLiveData<SendProgress?>()
+    val sendProgress: LiveData<SendProgress?> = _sendProgress
+    
     private val _bulkSendConfirmation = MutableLiveData<BulkSendConfirmation?>()
     val bulkSendConfirmation: LiveData<BulkSendConfirmation?> = _bulkSendConfirmation
     
     private var pendingRecipients: List<String> = emptyList()
     private var pendingMessage: String = ""
+    
+    data class SendProgress(
+        val currentRecipient: Int,
+        val totalRecipients: Int,
+        val segmentsPerMessage: Int
+    )
+    
+    data class SendResult(
+        val successCount: Int,
+        val failureCount: Int,
+        val totalRecipients: Int,
+        val segmentsPerMessage: Int,
+        val lastError: String?
+    )
 
     fun loadContacts() {
         _isLoading.value = true
@@ -79,36 +99,106 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         _selectedIds.value = emptySet()
     }
     
+    fun clearSendResult() {
+        _sendResult.value = null
+    }
+    
+    // Helper function to get localized strings
+    private fun getLocalizedString(resId: Int, vararg formatArgs: Any?): String {
+        // Always get fresh language preference
+        val currentLanguage = LocaleManager.getCurrentLanguage(getApplication())
+        val localizedContext = LocaleManager.setLocale(getApplication(), currentLanguage)
+        return if (formatArgs.isEmpty()) {
+            localizedContext.getString(resId)
+        } else {
+            localizedContext.getString(resId, *formatArgs)
+        }
+    }
+    
     fun onMessageTextChanged(text: String) {
         if (text.isEmpty()) {
-            _segmentCount.value = context.getString(R.string.segments_count_zero)
+            _segmentCount.value = getLocalizedString(R.string.segments_count_zero)
             return
         }
         val result = SmsMessage.calculateLength(text, false)
-        _segmentCount.value = context.getString(R.string.segments_count, result[0], result[2])
+        _segmentCount.value = getLocalizedString(R.string.segments_count, result[0], result[2])
+    }
+    
+    fun updateRecipientsCount(manualNumber: String) {
+        // Run in background to prevent UI freezing
+        viewModelScope.launch {
+            val recipients = ArrayList<String>()
+            
+            // Parse manual numbers from multiline input
+            // Filter out empty lines
+            val lines = manualNumber.split("\n", "\r\n")
+            lines.forEach { line ->
+                val trimmedLine = line.trim()
+                // Only process non-empty lines
+                if (trimmedLine.isNotEmpty() && NumberValidator.isValidPhoneNumber(trimmedLine)) {
+                    val normalized = NumberValidator.normalizeNumber(trimmedLine)
+                    if (normalized.isNotEmpty() && !recipients.contains(normalized)) {
+                        recipients.add(normalized)
+                    }
+                }
+            }
+            
+            // Add selected contacts
+            val selected = _selectedIds.value.orEmpty()
+            _contacts.value?.filter { selected.contains(it.id) }?.forEach { 
+                val normalized = it.normalizedNumber
+                if (!recipients.contains(normalized)) {
+                    recipients.add(normalized)
+                }
+            }
+            
+            // Update status based on recipient count
+            when {
+                recipients.isEmpty() -> {
+                    _sendStatus.postValue(getLocalizedString(R.string.recipients_count_zero))
+                }
+                recipients.size == 1 -> {
+                    _sendStatus.postValue(getLocalizedString(R.string.recipients_count_one))
+                }
+                else -> {
+                    _sendStatus.postValue(getLocalizedString(R.string.recipients_count, recipients.size))
+                }
+            }
+        }
     }
     
     fun sendSms(manualNumber: String, message: String) {
         if (message.isBlank()) {
-            _sendStatus.value = context.getString(R.string.message_empty)
+            _sendStatus.value = getLocalizedString(R.string.message_empty)
             return
         }
 
         val recipients = ArrayList<String>()
         
-        // Add manual number if valid
-        if (NumberValidator.isValidPhoneNumber(manualNumber)) {
-            recipients.add(NumberValidator.normalizeNumber(manualNumber))
+        // Parse manual numbers from multiline input
+        // Split by newlines and process each line
+        val lines = manualNumber.split("\n", "\r\n")
+        lines.forEach { line ->
+            val trimmedLine = line.trim()
+            if (trimmedLine.isNotEmpty() && NumberValidator.isValidPhoneNumber(trimmedLine)) {
+                val normalized = NumberValidator.normalizeNumber(trimmedLine)
+                if (normalized.isNotEmpty() && !recipients.contains(normalized)) {
+                    recipients.add(normalized)
+                }
+            }
         }
         
         // Add selected contacts
         val selected = _selectedIds.value.orEmpty()
         _contacts.value?.filter { selected.contains(it.id) }?.forEach { 
-            recipients.add(it.normalizedNumber)
+            val normalized = it.normalizedNumber
+            if (!recipients.contains(normalized)) {
+                recipients.add(normalized)
+            }
         }
         
         if (recipients.isEmpty()) {
-            _sendStatus.value = context.getString(R.string.no_valid_recipients)
+            _sendStatus.value = getLocalizedString(R.string.no_valid_recipients)
             return
         }
         
@@ -147,14 +237,29 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     
     private fun performSendSms(recipients: List<String>, message: String) {
         _isSending.value = true
-        _sendStatus.value = context.getString(R.string.sending_to, recipients.size)
+        _sendStatus.value = getLocalizedString(R.string.sending_to, recipients.size)
+        
+        // Calculate segments per message
+        val result = SmsMessage.calculateLength(message, false)
+        val segmentsPerMessage = result[0]
+        
+        // Determine if we should show progress dialog (for time-consuming sends)
+        val shouldShowProgress = recipients.size > 3 || segmentsPerMessage > 3 || (recipients.size * segmentsPerMessage) > 10
         
         viewModelScope.launch {
             var successCount = 0
             var failureCount = 0
             var lastError: String? = null
+            var currentIndex = 0
             
-            recipients.forEach { number ->
+            recipients.forEachIndexed { index, number ->
+                currentIndex = index + 1
+                
+                // Update progress if needed
+                if (shouldShowProgress) {
+                    _sendProgress.postValue(SendProgress(currentIndex, recipients.size, segmentsPerMessage))
+                }
+                
                 when (val result = smsRepository.sendSms(number, message)) {
                     is SmsResult.Success -> {
                         successCount++
@@ -166,21 +271,33 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 }
             }
             
+            // Clear progress
+            _sendProgress.postValue(null)
             _isSending.postValue(false)
             
+            // Set result for detailed dialog
+            _sendResult.postValue(SendResult(
+                successCount = successCount,
+                failureCount = failureCount,
+                totalRecipients = recipients.size,
+                segmentsPerMessage = segmentsPerMessage,
+                lastError = lastError
+            ))
+            
+            // Keep old status for compatibility
             when {
                 failureCount == 0 -> {
-                    _sendStatus.postValue(context.getString(R.string.sent_to_recipients, successCount))
+                    _sendStatus.postValue(getLocalizedString(R.string.sent_to_recipients, successCount))
                 }
                 successCount == 0 -> {
                     _sendStatus.postValue(
-                        context.getString(R.string.error_sending_sms, lastError ?: context.getString(R.string.error_unknown))
+                        getLocalizedString(R.string.error_sending_sms, lastError ?: getLocalizedString(R.string.error_unknown))
                     )
                 }
                 else -> {
-                    val successMsg = context.getString(R.string.sent_to_recipients, successCount)
+                    val successMsg = getLocalizedString(R.string.sent_to_recipients, successCount)
                     _sendStatus.postValue(
-                        context.getString(R.string.send_partial_success, successMsg, failureCount)
+                        getLocalizedString(R.string.send_partial_success, successMsg, failureCount)
                     )
                 }
             }

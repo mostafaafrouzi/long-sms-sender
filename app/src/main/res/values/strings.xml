@@ -1,9 +1,12 @@
 <resources>
     <string name="app_name">Long SMS Sender</string>
     <string name="load_contacts">Load Contacts</string>
+    <string name="contacts">Contacts</string>
+    <string name="select_contact">Select Contact</string>
     <string name="select_all">Select All</string>
     <string name="clear_selection">Clear</string>
-    <string name="phone_hint">Manual Phone Number</string>
+    <string name="phone_hint">Recipient Number(s)</string>
+    <string name="phone_hint_helper">Enter each number on a separate line</string>
     <string name="message_hint">Type your message here...</string>
     <string name="paste">Paste</string>
     <string name="send">Send</string>
@@ -20,6 +23,9 @@
     <string name="message_empty">Message is empty</string>
     <string name="no_valid_recipients">No valid recipients</string>
     <string name="sent_to_recipients">Sent to %1$d recipients</string>
+    <string name="recipients_count">%1$d recipient(s) selected</string>
+    <string name="recipients_count_one">1 recipient selected</string>
+    <string name="recipients_count_zero">No recipients</string>
     <string name="segments_count">%1$d segments (%2$d chars left)</string>
     <string name="segments_count_zero">0 segments (0 chars)</string>
     <string name="selected_count">%1$d selected</string>
@@ -51,13 +57,32 @@
     <string name="language_english">English</string>
     <string name="language_persian">فارسی</string>
     <string name="change_language">Change Language</string>
+    <string name="theme">Theme</string>
+    <string name="search_contacts">Search contacts...</string>
+    <string name="select">Select</string>
+    <string name="no_search_results">No contacts found</string>
     
     <!-- About -->
     <string name="about">About</string>
-    <string name="about_title">About App</string>
+    <string name="about_title">About This App</string>
+    <string name="about_description">This application is an open-source project built with a focus on simplicity, performance, and user privacy.\n\nNo user data is collected or stored. All operations are processed directly on your device.</string>
+    <string name="about_open_source">This project is released as open source, and developers are welcome to contribute and improve it.\n\nIf you have ideas or would like to collaborate, your participation is highly appreciated.</string>
+    <string name="visit_website">Visit Website</string>
+    <string name="close">Close</string>
+    <string name="ok">OK</string>
+    <string name="ok_with_countdown">OK (%1$d)</string>
+    <string name="auto_closing_in">Auto-closing in %1$d seconds</string>
+    <string name="send_status_success">Your message with %1$d segment(s) has been successfully sent to %2$d selected recipient(s).</string>
+    <string name="send_status_partial">Your message with %1$d segment(s) has been sent to %2$d recipient(s), but %3$d failed.</string>
+    <string name="send_status_error">Failed to send your message. Error: %1$s</string>
+    <string name="sending_progress_title">Sending SMS</string>
+    <string name="sending_progress_status">Sending to recipient %1$d of %2$d…</string>
+    <string name="sending_progress_details">Message: %1$d segment(s) per recipient</string>
     <string name="app_version">Version</string>
     <string name="developer">Developer</string>
     <string name="developer_name">Mostafa Afrouzi</string>
+    <string name="developer_info">Web &amp; Software Developer</string>
+    <string name="share_app_text_github">Do you have issues with SMS being converted to MMS after three pages? With this app, you can send long text messages as SMS without automatic MMS conversion, send to one or multiple recipients, with no limitations on message length and without the common issues caused by carriers or restrictions on some Android devices.\n\n%1$s</string>
     <string name="privacy_statement">This app does not collect or store any information. All SMS messages are sent directly from your device.</string>
     
     <!-- Share -->

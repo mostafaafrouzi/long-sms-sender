@@ -3,6 +3,7 @@ package com.mostafaafrouzi.longsmssender
 import android.app.Application
 import android.content.Context
 import com.mostafaafrouzi.longsmssender.utils.LocaleManager
+import com.mostafaafrouzi.longsmssender.utils.ThemeManager
 
 class LongSmsApp : Application() {
     override fun attachBaseContext(base: Context) {
@@ -12,6 +13,7 @@ class LongSmsApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        // Initialize things here if needed
+        // Apply theme
+        ThemeManager.applyTheme(this)
     }
 }

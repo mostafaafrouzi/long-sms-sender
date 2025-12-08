@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:minWidth="300dp">
+
+    <TextView
+        android:id="@+id/txtProgressTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="?attr/colorOnSurface"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"
+        tools:text="Sending SMS..." />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_marginBottom="16dp"
+        android:max="100"
+        android:progress="0" />
+
+    <TextView
+        android:id="@+id/txtProgressStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="?attr/colorOnSurface"
+        android:gravity="center"
+        android:layout_marginBottom="8dp"
+        tools:text="Sending to recipient 3 of 10..." />
+
+    <TextView
+        android:id="@+id/txtProgressDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="?attr/colorOnSurface"
+        android:alpha="0.7"
+        android:gravity="center"
+        tools:text="Message: 4 segments per recipient" />
+
+</LinearLayout>
+

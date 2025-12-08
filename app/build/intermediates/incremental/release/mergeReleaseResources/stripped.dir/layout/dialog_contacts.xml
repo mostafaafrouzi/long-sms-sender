@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:minHeight="400dp"
+    android:maxHeight="600dp">
+
+    <!-- Search Bar -->
+    <EditText
+        android:id="@+id/edtSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/search_contacts"
+        android:inputType="text"
+        android:minLines="1"
+        android:maxLines="5"
+        android:scrollbars="vertical"
+        android:padding="12dp"
+        android:layout_margin="8dp"
+        android:drawableStart="@android:drawable/ic_menu_search"
+        android:drawablePadding="8dp"
+        android:paddingStart="40dp" />
+
+    <!-- Selection Controls -->
+    <LinearLayout
+        android:id="@+id/layoutSelection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:background="?attr/colorSurfaceVariant">
+
+        <Button
+            android:id="@+id/btnSelectAll"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/select_all"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:singleLine="true"
+            android:ellipsize="none"
+            android:layout_marginEnd="4dp" />
+
+        <Button
+            android:id="@+id/btnClearSelection"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/clear_selection"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_marginStart="4dp" />
+
+        <TextView
+            android:id="@+id/txtSelectionStatusDialog"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end|center_vertical"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textSize="12sp"
+            android:textColor="?attr/colorOnSurface"
+            android:alpha="0.7"
+            tools:text="5 selected" />
+
+    </LinearLayout>
+
+    <!-- Contacts List -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerContactsDialog"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingStart="16dp"
+            android:paddingEnd="60dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:visibility="gone"
+            tools:listitem="@layout/item_contact"
+            tools:visibility="visible" />
+
+        <!-- Loading Indicator -->
+        <ProgressBar
+            android:id="@+id/progressLoadingDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <!-- Empty State: No Contacts -->
+        <LinearLayout
+            android:id="@+id/emptyNoContactsDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="32dp"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/empty_no_contacts"
+                android:textSize="16sp"
+                android:textColor="?attr/colorOnSurface"
+                android:alpha="0.6"
+                android:gravity="center"
+                android:lineSpacingExtra="4dp" />
+
+        </LinearLayout>
+
+        <!-- Empty State: No Search Results -->
+        <LinearLayout
+            android:id="@+id/emptyNoSearchResults"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="32dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_search_results"
+                android:textSize="16sp"
+                android:textColor="?attr/colorOnSurface"
+                android:alpha="0.6"
+                android:gravity="center"
+                android:lineSpacingExtra="4dp" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>

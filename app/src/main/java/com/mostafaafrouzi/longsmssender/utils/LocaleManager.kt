@@ -47,8 +47,20 @@ object LocaleManager {
 
         val resources: Resources = context.resources
         val configuration: Configuration = resources.configuration
-        configuration.setLocale(locale)
-        configuration.setLayoutDirection(locale)
+        
+        // Set locale
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            configuration.setLocale(locale)
+        } else {
+            @Suppress("DEPRECATION")
+            configuration.locale = locale
+        }
+        
+        // Set layout direction explicitly
+        val isRtl = languageCode == "fa" || languageCode == "ar"
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            configuration.setLayoutDirection(locale)
+        }
 
         return context.createConfigurationContext(configuration)
     }

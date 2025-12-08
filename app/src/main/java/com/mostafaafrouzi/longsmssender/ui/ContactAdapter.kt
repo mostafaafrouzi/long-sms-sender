@@ -1,7 +1,9 @@
 package com.mostafaafrouzi.longsmssender.ui
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.SectionIndexer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -10,32 +12,31 @@ import com.mostafaafrouzi.longsmssender.databinding.ItemContactBinding
 
 class ContactAdapter(
     private val onItemClick: (Contact) -> Unit
-) : ListAdapter<Contact, ContactAdapter.ContactViewHolder>(ContactDiffCallback()) {
+) : ListAdapter<Contact, ContactAdapter.ContactViewHolder>(ContactDiffCallback()), SectionIndexer {
 
     private var selectedIds = setOf<String>()
+    private var alphabetIndexer: AlphabetIndexer? = null
 
     fun updateSelection(newSelection: Set<String>) {
-        val oldSelection = selectedIds
         selectedIds = newSelection
-        
-        // Use DiffUtil to efficiently update only changed items
-        val diffResult = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
-            override fun getOldListSize(): Int = currentList.size
-            override fun getNewListSize(): Int = currentList.size
-            
-            override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return oldItemPosition == newItemPosition
-            }
-            
-            override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                val contact = currentList[oldItemPosition]
-                val wasSelected = oldSelection.contains(contact.id)
-                val isSelected = newSelection.contains(contact.id)
-                return wasSelected == isSelected
-            }
-        })
-        
-        diffResult.dispatchUpdatesTo(this)
+        // Notify all items that selection might have changed
+        notifyItemRangeChanged(0, currentList.size)
+    }
+    
+    fun updateAlphabetIndexer(contacts: List<Contact>) {
+        alphabetIndexer = AlphabetIndexer(contacts)
+    }
+    
+    override fun getSections(): Array<String> {
+        return alphabetIndexer?.getSections() ?: emptyArray()
+    }
+    
+    override fun getPositionForSection(sectionIndex: Int): Int {
+        return alphabetIndexer?.getPositionForSection(sectionIndex) ?: 0
+    }
+    
+    override fun getSectionForPosition(position: Int): Int {
+        return alphabetIndexer?.getSectionForPosition(position) ?: 0
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
@@ -52,6 +53,7 @@ class ContactAdapter(
         fun bind(contact: Contact, isSelected: Boolean) {
             binding.txtName.text = contact.name
             binding.txtNumber.text = contact.phoneNumber
+            binding.checkbox.visibility = View.VISIBLE
             binding.checkbox.isChecked = isSelected
             
             binding.root.setOnClickListener {

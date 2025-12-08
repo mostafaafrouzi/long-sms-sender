@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp">
+
+    <!-- Header -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:title="@string/app_name"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/layoutToolbarActions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_constraintEnd_toEndOf="@id/toolbar"
+        app:layout_constraintTop_toTopOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="@id/toolbar"
+        android:layout_marginEnd="8dp">
+
+        <Button
+            android:id="@+id/btnLanguage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/language"
+            android:textColor="@android:color/white"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:minWidth="0dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp" />
+
+        <Button
+            android:id="@+id/btnAbout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/about"
+            android:textColor="@android:color/white"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:minWidth="0dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp" />
+
+        <Button
+            android:id="@+id/btnShare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/share_app"
+            android:textColor="@android:color/white"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:minWidth="0dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp" />
+
+        <Button
+            android:id="@+id/btnLoadContacts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/load_contacts"
+            android:textColor="@android:color/white"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:minWidth="0dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp" />
+
+    </LinearLayout>
+
+    <!-- Selection Controls -->
+    <LinearLayout
+        android:id="@+id/layoutSelection"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:background="?attr/colorSurface"
+        android:elevation="2dp"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/btnSelectAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/select_all"
+            style="@style/Widget.MaterialComponents.Button.TextButton"/>
+
+        <Button
+            android:id="@+id/btnClearSelection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/clear_selection"
+            style="@style/Widget.MaterialComponents.Button.TextButton"/>
+        
+        <TextView
+            android:id="@+id/txtSelectionStatus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end|center_vertical"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            tools:text="5 selected"/>
+
+    </LinearLayout>
+
+    <!-- Contact List Container -->
+    <FrameLayout
+        android:id="@+id/containerContacts"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/layoutSelection"
+        app:layout_constraintBottom_toTopOf="@id/layoutInput"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerContacts"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="80dp"
+            android:visibility="gone"
+            tools:listitem="@layout/item_contact"
+            tools:visibility="visible"/>
+
+        <ProgressBar
+            android:id="@+id/progressLoading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            tools:visibility="visible"/>
+
+        <LinearLayout
+            android:id="@+id/emptyNoContacts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="48dp"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/empty_no_contacts"
+                android:textSize="18sp"
+                android:textColor="?attr/colorOnSurface"
+                android:alpha="0.6"
+                android:gravity="center"
+                android:lineSpacingExtra="6dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/emptyNoSelection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="48dp"
+            android:visibility="gone"
+            tools:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/empty_no_selection"
+                android:textSize="18sp"
+                android:textColor="?attr/colorOnSurface"
+                android:alpha="0.6"
+                android:gravity="center"
+                android:lineSpacingExtra="6dp"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <!-- Input Area -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorSurface"
+        android:elevation="8dp"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_max="800dp"
+        app:layout_constraintWidth_percent="0.9">
+
+        <EditText
+            android:id="@+id/edtPhone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/phone_hint"
+            android:inputType="phone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <EditText
+            android:id="@+id/edtMessage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/message_hint"
+            android:inputType="textMultiLine"
+            android:minLines="3"
+            android:maxLines="6"
+            android:gravity="top|start"
+            android:textDirection="locale"
+            app:layout_constraintTop_toBottomOf="@id/edtPhone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnPaste" />
+
+        <ImageButton
+            android:id="@+id/btnPaste"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_paste"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/paste"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/edtMessage"
+            app:layout_constraintTop_toTopOf="@id/edtMessage"/>
+
+        <TextView
+            android:id="@+id/txtSegment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 segments"
+            android:textSize="12sp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edtMessage"/>
+
+        <Button
+            android:id="@+id/btnSend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/send"
+            android:enabled="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edtMessage"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ProgressBar
+            android:id="@+id/progressSending"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="8dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@id/btnSend"
+            app:layout_constraintTop_toTopOf="@id/btnSend"
+            app:layout_constraintBottom_toBottomOf="@id/btnSend"
+            tools:visibility="visible"/>
+
+        <TextView
+            android:id="@+id/txtStatus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="?attr/colorPrimary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/progressSending"
+            app:layout_constraintTop_toBottomOf="@id/txtSegment"
+            tools:text="Status: Ready"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

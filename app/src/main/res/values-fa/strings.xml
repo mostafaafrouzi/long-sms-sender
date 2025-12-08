@@ -1,9 +1,12 @@
 <resources>
     <string name="app_name">ارسال پیامک بلند</string>
     <string name="load_contacts">بارگذاری مخاطبین</string>
+    <string name="contacts">مخاطبین</string>
+    <string name="select_contact">انتخاب مخاطب</string>
     <string name="select_all">انتخاب همه</string>
     <string name="clear_selection">پاک کردن</string>
-    <string name="phone_hint">شماره تلفن دستی</string>
+    <string name="phone_hint">شماره گیرنده یا گیرندگان</string>
+    <string name="phone_hint_helper">هر شماره در یک سطر</string>
     <string name="message_hint">پیام خود را اینجا بنویسید…</string>
     <string name="paste">چسباندن</string>
     <string name="send">ارسال</string>
@@ -20,6 +23,9 @@
     <string name="message_empty">پیام خالی است</string>
     <string name="no_valid_recipients">هیچ گیرنده معتبری وجود ندارد</string>
     <string name="sent_to_recipients">ارسال شد به %1$d گیرنده</string>
+    <string name="recipients_count">%1$d گیرنده انتخاب شده</string>
+    <string name="recipients_count_one">1 گیرنده انتخاب شده</string>
+    <string name="recipients_count_zero">هیچ گیرنده‌ای انتخاب نشده</string>
     <string name="segments_count">%1$d بخش (%2$d کاراکتر باقی مانده)</string>
     <string name="segments_count_zero">0 بخش (0 کاراکتر)</string>
     <string name="selected_count">%1$d انتخاب شده</string>
@@ -51,13 +57,32 @@
     <string name="language_english">English</string>
     <string name="language_persian">فارسی</string>
     <string name="change_language">تغییر زبان</string>
+    <string name="theme">تم</string>
+    <string name="search_contacts">جستجوی مخاطبین…</string>
+    <string name="select">انتخاب</string>
+    <string name="no_search_results">مخاطبی یافت نشد</string>
     
     <!-- About -->
     <string name="about">درباره</string>
     <string name="about_title">درباره برنامه</string>
+    <string name="about_description">این اپلیکیشن یک ابزار متن‌باز (Open Source) است که با هدف سادگی، سرعت و احترام به حریم خصوصی کاربران توسعه داده شده است.\n\nهیچ‌گونه اطلاعاتی از کاربران جمع‌آوری یا ذخیره نمی‌شود و تمام پردازش‌ها مستقیماً روی دستگاه شما انجام می‌گیرد.</string>
+    <string name="about_open_source">این پروژه به صورت متن‌باز (Open Source) منتشر شده و مشارکت توسعه‌دهندگان در بهبود آن آزاد است. اگر پیشنهادی برای توسعه دارید یا مایل به همکاری هستید، باعث افتخار است.</string>
+    <string name="visit_website">بازدید از وب‌سایت</string>
+    <string name="close">بستن</string>
+    <string name="ok">تأیید</string>
+    <string name="ok_with_countdown">تأیید (%1$d)</string>
+    <string name="auto_closing_in">بستن خودکار در %1$d ثانیه</string>
+    <string name="send_status_success">پیام شما با %1$d بخش به %2$d مخاطب انتخاب شده با موفقیت ارسال شد.</string>
+    <string name="send_status_partial">پیام شما با %1$d بخش به %2$d مخاطب ارسال شد، اما %3$d مورد ناموفق بود.</string>
+    <string name="send_status_error">ارسال پیام شما ناموفق بود. خطا: %1$s</string>
+    <string name="sending_progress_title">در حال ارسال پیامک</string>
+    <string name="sending_progress_status">در حال ارسال به مخاطب %1$d از %2$d…</string>
+    <string name="sending_progress_details">پیام: %1$d بخش برای هر مخاطب</string>
     <string name="app_version">نسخه</string>
     <string name="developer">توسعه‌دهنده</string>
-    <string name="developer_name">مصطفی افرازی</string>
+    <string name="developer_name">مصطفی افروزی</string>
+    <string name="developer_info">طراح و توسعه‌دهنده وب، اپلیکیشن و سیستم‌های نرم‌افزاری</string>
+    <string name="share_app_text_github">آیا مشکل تبدیل SMS بیشتر از ۳ صفحه به MMS داری؟ با این برنامه می‌توانی پیامک‌های بلند را بدون تبدیل به MMS ارسال کنی و به یک یا چند گیرنده پیام بفرستی، بدون محدودیت در طول پیام و بدون دردسرهای رایج اپراتورها و محدودیت‌های برخی گوشی‌های اندرویدی.\n\n%1$s</string>
     <string name="privacy_statement">این برنامه هیچ اطلاعاتی را جمع‌آوری یا ذخیره نمی‌کند. تمام پیامک‌ها مستقیماً از دستگاه شما ارسال می‌شوند.</string>
     
     <!-- Share -->
