@@ -74,5 +74,57 @@ jobs:
         files: app/build/outputs/apk/release/*.apk
         draft: false
         prerelease: false
-        generate_release_notes: true
+        generate_release_notes: false
+        body: |
+          # Long SMS Sender v1.0.0
+          
+          ## 🎉 اولین نسخه منتشر شده | First Release
+          
+          یک برنامه اندروید حرفه‌ای برای ارسال پیامک‌های بلند به صورت SMS چندبخشی بدون تبدیل به MMS.
+          
+          A production-grade Android application for sending long text messages as multi-part SMS without MMS conversion.
+          
+          ## ✨ ویژگی‌های اصلی | Key Features
+          
+          - ✅ ارسال پیامک‌های با طول نامحدود به صورت چندبخشی | Send unlimited length SMS as multi-part
+          - ✅ جلوگیری کامل از تبدیل به MMS | Absolutely prevent MMS conversion
+          - ✅ انتخاب مخاطبین با جستجو | Contact selection with search
+          - ✅ ورود دستی شماره تلفن (چند خطی) | Manual phone number input (multi-line)
+          - ✅ شمارشگر بخش‌های پیامک به صورت لحظه‌ای | Real-time SMS segment counter
+          - ✅ پشتیبانی کامل از زبان فارسی و انگلیسی | Full Persian & English language support
+          - ✅ پشتیبانی از حالت تاریک | Dark mode support
+          - ✅ پشتیبانی از RTL | RTL layout support
+          - ✅ بدون نیاز به اینترنت | No internet permission required
+          - ✅ بدون تبلیغات و ردیابی | No ads, no analytics, no tracking
+          
+          ## 🔒 حریم خصوصی | Privacy
+          
+          این برنامه هیچ اطلاعاتی را جمع‌آوری یا ذخیره نمی‌کند. تمام پیامک‌ها مستقیماً از دستگاه شما ارسال می‌شوند.
+          
+          This app does not collect or store any information. All SMS messages are sent directly from your device.
+          
+          ## 📥 دانلود | Download
+          
+          - **کافه‌بازار | CafeBazaar:** https://cafebazaar.ir/app/com.afrouzi.longsmssender
+          - **GitHub Releases:** این صفحه | This page
+          
+          ## 🛠️ جزئیات فنی | Technical Details
+          
+          - **Package Name:** com.afrouzi.longsmssender
+          - **Min SDK:** 23 (Android 6.0)
+          - **Target SDK:** 34 (Android 14)
+          - **Language:** Kotlin 100%
+          - **Architecture:** MVVM
+          
+          ## 👤 توسعه‌دهنده | Developer
+          
+          **Mostafa Afrouzi | مصطفی افروزی**
+          
+          - 🌐 Website: https://afrouzi.ir
+          - 💻 GitHub: https://github.com/mostafaafrouzi
+          - 💼 LinkedIn: https://linkedin.com/in/mostafaafrouzi
+          
+          ---
+          
+          **Made with ❤️ for users who need to send long SMS messages without MMS conversion**
 
