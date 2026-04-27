@@ -25,5 +25,13 @@
         android:layout_height="wrap_content"
         android:text="@string/ok"
         android:textAllCaps="false" />
+    
+    <Button
+        android:id="@+id/btnShareReport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/share_report"
+        android:textAllCaps="false" />
 
 </LinearLayout>

@@ -33,7 +33,7 @@ class ContactRepository(private val context: Context) {
             val numberIndex = it.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
 
             while (it.moveToNext()) {
-                val id = it.getString(idIndex) ?: ""
+                val contactId = it.getString(idIndex) ?: ""
                 val name = it.getString(nameIndex) ?: "Unknown"
                 val rawNumber = it.getString(numberIndex) ?: ""
                 
@@ -41,7 +41,8 @@ class ContactRepository(private val context: Context) {
 
                 if (normalizedNumber.isNotEmpty() && !uniqueNumbers.contains(normalizedNumber)) {
                     uniqueNumbers.add(normalizedNumber)
-                    contactsList.add(Contact(id, name, rawNumber, normalizedNumber))
+                    val uniqueRowId = "${contactId}_$normalizedNumber"
+                    contactsList.add(Contact(uniqueRowId, name, rawNumber, normalizedNumber))
                 }
             }
         }

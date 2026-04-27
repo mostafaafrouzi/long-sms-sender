@@ -18,11 +18,12 @@ class ContactAdapter(
     private var alphabetIndexer: AlphabetIndexer? = null
 
     fun updateSelection(newSelection: Set<String>) {
+        val normalizedSelection = newSelection.toSet()
         // Only update if selection actually changed
-        if (selectedIds == newSelection) {
+        if (selectedIds == normalizedSelection) {
             return
         }
-        selectedIds = newSelection
+        selectedIds = normalizedSelection
         // Notify all items that selection might have changed
         // Use notifyDataSetChanged for better performance when many items change
         notifyDataSetChanged()

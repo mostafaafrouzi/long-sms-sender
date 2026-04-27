@@ -132,55 +132,51 @@ jobs:
         prerelease: false
         generate_release_notes: false
         body: |
-          # Long SMS Sender v1.0.0
-          
-          ## 🎉 اولین نسخه منتشر شده | First Release
-          
-          یک برنامه اندروید حرفه‌ای برای ارسال پیامک‌های بلند به صورت SMS چندبخشی بدون تبدیل به MMS.
-          
-          A production-grade Android application for sending long text messages as multi-part SMS without MMS conversion.
-          
-          ## ✨ ویژگی‌های اصلی | Key Features
-          
-          - ✅ ارسال پیامک‌های با طول نامحدود به صورت چندبخشی | Send unlimited length SMS as multi-part
-          - ✅ جلوگیری کامل از تبدیل به MMS | Absolutely prevent MMS conversion
-          - ✅ انتخاب مخاطبین با جستجو | Contact selection with search
-          - ✅ ورود دستی شماره تلفن (چند خطی) | Manual phone number input (multi-line)
-          - ✅ شمارشگر بخش‌های پیامک به صورت لحظه‌ای | Real-time SMS segment counter
-          - ✅ پشتیبانی کامل از زبان فارسی و انگلیسی | Full Persian & English language support
-          - ✅ پشتیبانی از حالت تاریک | Dark mode support
-          - ✅ پشتیبانی از RTL | RTL layout support
-          - ✅ بدون نیاز به اینترنت | No internet permission required
-          - ✅ بدون تبلیغات و ردیابی | No ads, no analytics, no tracking
-          
-          ## 🔒 حریم خصوصی | Privacy
-          
-          این برنامه هیچ اطلاعاتی را جمع‌آوری یا ذخیره نمی‌کند. تمام پیامک‌ها مستقیماً از دستگاه شما ارسال می‌شوند.
-          
-          This app does not collect or store any information. All SMS messages are sent directly from your device.
-          
-          ## 📥 دانلود | Download
-          
-          - **کافه‌بازار | CafeBazaar:** https://cafebazaar.ir/app/com.afrouzi.longsmssender
-          - **GitHub Releases:** این صفحه | This page
-          
-          ## 🛠️ جزئیات فنی | Technical Details
-          
-          - **Package Name:** com.afrouzi.longsmssender
-          - **Min SDK:** 23 (Android 6.0)
-          - **Target SDK:** 34 (Android 14)
-          - **Language:** Kotlin 100%
-          - **Architecture:** MVVM
-          
-          ## 👤 توسعه‌دهنده | Developer
-          
-          **Mostafa Afrouzi | مصطفی افروزی**
-          
-          - 🌐 Website: https://afrouzi.ir
-          - 💻 GitHub: https://github.com/mostafaafrouzi
-          - 💼 LinkedIn: https://linkedin.com/in/mostafaafrouzi
-          
+          # Long SMS Sender ${{ github.ref_name }}
+
+          ## Release notes | یادداشت انتشار
+
+          ### English — v1.1.0
+
+          - **SIM selection**: choose default SIM or a specific SIM slot on dual-SIM devices (requires phone state permission when listing SIMs).
+          - **Recipient groups**: save, load, and delete named groups of recipients for bulk sending.
+          - **Scheduled SMS**: schedule send time with confirmation; optional battery-optimization prompt for reliability; manage from the toolbar (clock icon)—cancel, send now, or reschedule.
+          - **Prepared messages**: save and reuse message templates next to the message field.
+          - **Share into app**: receive text and numbers from other apps via Share / `sms:` / `smsto:` intents.
+          - **Send queue controls**: pause, resume, or cancel long bulk sends; improved send status and share report.
+          - **UX & fixes**: correct multi-number contact selection; labels and pickers follow app language after switching EN/فا without restarting; segment counter and recipient status refresh with locale.
+
+          ### فارسی — نسخه ۱.۱.۰
+
+          - **انتخاب سیم‌کارت**: سیم پیش‌فرض یا اسلات مشخص روی دستگاه دو سیم‌کارته (در صورت نیاز مجوز وضعیت تلفن برای نمایش فهرست سیم‌ها).
+          - **گروه گیرنده**: ذخیره، بارگذاری و حذف گروه‌های نام‌دار برای ارسال گروهی.
+          - **پیام زمان‌بندی‌شده**: انتخاب زمان با تأیید؛ در صورت نیاز درخواست مستثنی شدن از بهینه‌سازی باتری؛ مدیریت از نوار بالا (آیکون ساعت)—لغو، ارسال فوری یا زمان جدید.
+          - **پیام‌های آماده**: ذخیره و استفادهٔ سریع از قالب‌ها کنار فیلد پیام.
+          - **اشتراک‌گذاری به برنامه**: دریافت متن و شماره از برنامه‌های دیگر از مسیر Share و لینک‌های `sms`/`smsto`.
+          - **کنترل صف ارسال**: توقف موقت، ادامه یا لغو برای ارسال‌های طولانی؛ بهبود گزارش وضعیت و اشتراک گزارش.
+          - **تجربه کاربری و رفع اشکال**: انتخاب درست چند شماره برای یک مخاطب؛ هماهنگی برچسب‌ها و انتخابگر تاریخ/زمان با زبان برنامه بدون نیاز به بستن کامل اپ؛ به‌روز شدن شمارنده بخش و وضعیت گیرندگان هنگام تعویض زبان.
+
           ---
-          
-          **Made with ❤️ for users who need to send long SMS messages without MMS conversion**
+
+          ## 🔒 Privacy | حریم خصوصی
+
+          No data collection. SMS is sent from your device only. Extra permissions are used only for SIM listing, scheduling reliability, contacts, and SMS sending as documented in the README.
+
+          ## 📥 Download | دانلود
+
+          - **CafeBazaar:** https://cafebazaar.ir/app/com.afrouzi.longsmssender
+          - Attachments: signed APK on this release (when `KEYSTORE_*` secrets are configured).
+
+          ## 🛠️ Technical | فنی
+
+          - **Package:** `com.afrouzi.longsmssender`
+          - **Min SDK:** 23 · **Target SDK:** 34
+          - **Kotlin / MVVM**
+
+          ## 👤 Developer | توسعه‌دهنده
+
+          **Mostafa Afrouzi** · https://afrouzi.ir · https://github.com/mostafaafrouzi
+
+          ---
+          **Made with ❤️ for long SMS without unwanted MMS conversion**
 

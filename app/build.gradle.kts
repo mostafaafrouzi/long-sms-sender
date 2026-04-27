@@ -11,8 +11,8 @@ android {
         applicationId = "com.afrouzi.longsmssender"
         minSdk = 23
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 2
+        versionName = "1.1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -49,4 +49,5 @@ dependencies {
     implementation("androidx.activity:activity-ktx:1.5.1")
     implementation("androidx.fragment:fragment-ktx:1.5.3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+    implementation("androidx.work:work-runtime-ktx:2.9.1")
 }

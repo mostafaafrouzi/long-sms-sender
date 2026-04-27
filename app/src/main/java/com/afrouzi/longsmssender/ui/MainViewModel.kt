@@ -1,6 +1,7 @@
 package com.afrouzi.longsmssender.ui
 
 import android.app.Application
+import android.content.Context
 import android.telephony.SmsMessage
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -10,6 +11,7 @@ import com.afrouzi.longsmssender.R
 import com.afrouzi.longsmssender.data.model.Contact
 import com.afrouzi.longsmssender.data.model.SmsResult
 import com.afrouzi.longsmssender.data.repository.ContactRepository
+import com.afrouzi.longsmssender.data.repository.SimOption
 import com.afrouzi.longsmssender.data.repository.SmsRepository
 import com.afrouzi.longsmssender.utils.LocaleManager
 import com.afrouzi.longsmssender.utils.NumberValidator
@@ -18,6 +20,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlin.random.Random
 
 data class BulkSendConfirmation(
     val recipientCount: Int,
@@ -58,6 +61,17 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val _bulkSendConfirmation = MutableLiveData<BulkSendConfirmation?>()
     val bulkSendConfirmation: LiveData<BulkSendConfirmation?> = _bulkSendConfirmation
     
+    private val _availableSims = MutableLiveData<List<SimOption>>(emptyList())
+    val availableSims: LiveData<List<SimOption>> = _availableSims
+    
+    private val _selectedSim = MutableLiveData<SimOption?>(null)
+    val selectedSim: LiveData<SimOption?> = _selectedSim
+    
+    private val _isQueuePaused = MutableLiveData(false)
+    val isQueuePaused: LiveData<Boolean> = _isQueuePaused
+    
+    private var isQueueCancelled = false
+    
     private var pendingRecipients: List<String> = emptyList()
     private var pendingMessage: String = ""
     
@@ -75,7 +89,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         val failureCount: Int,
         val totalRecipients: Int,
         val segmentsPerMessage: Int,
-        val lastError: String?
+        val lastError: String?,
+        val recipientResults: List<RecipientSendResult>
+    )
+    
+    data class RecipientSendResult(
+        val number: String,
+        val success: Boolean,
+        val attempts: Int,
+        val error: String?
     )
 
     fun loadContacts() {
@@ -85,6 +107,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             _contacts.postValue(list)
             _isLoading.postValue(false)
         }
+    }
+    
+    fun loadSimOptions(displayContext: Context) {
+        _availableSims.value = smsRepository.getAvailableSimOptions(displayContext)
+    }
+    
+    fun selectSim(option: SimOption?) {
+        _selectedSim.value = option
     }
 
     fun toggleSelection(contact: Contact) {
@@ -112,6 +142,19 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     
     fun clearSendResult() {
         _sendResult.value = null
+    }
+    
+    fun pauseQueue() {
+        _isQueuePaused.value = true
+    }
+    
+    fun resumeQueue() {
+        _isQueuePaused.value = false
+    }
+    
+    fun cancelQueue() {
+        isQueueCancelled = true
+        _isQueuePaused.value = false
     }
     
     // Helper function to get localized strings
@@ -259,6 +302,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     
     private fun performSendSms(recipients: List<String>, message: String) {
         _isSending.value = true
+        isQueueCancelled = false
+        _isQueuePaused.value = false
         _sendStatus.value = getLocalizedString(R.string.sending_to, recipients.size)
         
         // Calculate segments per message
@@ -273,8 +318,18 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             var failureCount = 0
             var lastError: String? = null
             var currentIndex = 0
+            val recipientResults = mutableListOf<RecipientSendResult>()
             
             recipients.forEachIndexed { index, number ->
+                if (isQueueCancelled) {
+                    return@forEachIndexed
+                }
+                while (_isQueuePaused.value == true && !isQueueCancelled) {
+                    delay(250L)
+                }
+                if (isQueueCancelled) {
+                    return@forEachIndexed
+                }
                 currentIndex = index + 1
                 
                 // Update progress if needed
@@ -282,14 +337,36 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                     _sendProgress.postValue(SendProgress(currentIndex, recipients.size, segmentsPerMessage))
                 }
                 
-                when (val result = smsRepository.sendSms(number, message)) {
+                val (result, attempts) = sendWithRetry(number, message, _selectedSim.value?.subscriptionId)
+                when (result) {
                     is SmsResult.Success -> {
                         successCount++
+                        recipientResults.add(
+                            RecipientSendResult(
+                                number = number,
+                                success = true,
+                                attempts = attempts,
+                                error = null
+                            )
+                        )
                     }
                     is SmsResult.Error -> {
                         failureCount++
                         lastError = result.message
+                        recipientResults.add(
+                            RecipientSendResult(
+                                number = number,
+                                success = false,
+                                attempts = attempts,
+                                error = result.message
+                            )
+                        )
                     }
+                }
+                
+                // Small randomized delay improves carrier stability for bulk sends.
+                if (index < recipients.lastIndex) {
+                    delay(Random.nextLong(300L, 801L))
                 }
             }
             
@@ -303,11 +380,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 failureCount = failureCount,
                 totalRecipients = recipients.size,
                 segmentsPerMessage = segmentsPerMessage,
-                lastError = lastError
+                lastError = lastError,
+                recipientResults = recipientResults
             ))
             
             // Keep old status for compatibility
             when {
+                isQueueCancelled -> {
+                    _sendStatus.postValue(getLocalizedString(R.string.queue_cancelled_status))
+                }
                 failureCount == 0 -> {
                     _sendStatus.postValue(getLocalizedString(R.string.sent_to_recipients, successCount))
                 }
@@ -325,6 +406,29 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             }
             
             clearSelection()
+            _isQueuePaused.postValue(false)
+            isQueueCancelled = false
         }
+    }
+    
+    private suspend fun sendWithRetry(
+        number: String,
+        message: String,
+        subscriptionId: Int?
+    ): Pair<SmsResult, Int> {
+        val maxAttempts = 2
+        var lastResult: SmsResult = SmsResult.Error("Unknown error")
+        var attempts = 0
+        repeat(maxAttempts) { attempt ->
+            attempts = attempt + 1
+            lastResult = smsRepository.sendSms(number, message, subscriptionId)
+            if (lastResult is SmsResult.Success) {
+                return lastResult to attempts
+            }
+            if (attempt < maxAttempts - 1) {
+                delay(600L)
+            }
+        }
+        return lastResult to attempts
     }
 }

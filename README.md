@@ -11,11 +11,16 @@ A production-grade Android application that allows users to send very long text 
 Long SMS Sender enables you to:
 - Send **unlimited length** text messages as **multi-part SMS**
 - **Prevent automatic MMS conversion** that carriers often trigger
-- Select recipients from contacts or enter phone numbers manually
-- Send to single or multiple recipients with confirmation
-- Real-time SMS segment counter
-- Full Persian (فارسی) and English language support
-- Dark mode support
+- Select recipients from contacts or enter phone numbers manually (multi-line), with search and multi-select
+- **Recipient groups**: save, load, and reuse named lists of numbers
+- **SIM selection** on dual-SIM devices (default SIM or a chosen subscription)
+- **Scheduled SMS**: pick date & time, confirm, optional battery optimization hint; manage from the toolbar—cancel, send now, or edit/reschedule
+- **Prepared message templates** next to the message field (save, insert, manage)
+- **Share into the app** from other apps (plain text and `sms`/`smsto` links)
+- Send to single or multiple recipients with confirmation; **pause / resume / cancel** long queues
+- Real-time SMS segment counter; detailed send status and shareable report
+- Full Persian (فارسی) and English support with instant language switch (labels and pickers stay in sync)
+- Dark / light / system theme, RTL, tablet layouts
 
 ## 🛡️ Why It Prevents MMS
 
@@ -45,21 +50,25 @@ Your privacy is our priority. All operations happen locally on your device.
 
 ## 🔐 Permissions Explained
 
-This app requires only **two permissions**:
+The app requests **runtime permissions** only when needed:
 
-### 1. `SEND_SMS` Permission
-- **Why**: Required to send SMS messages
-- **When used**: Only when you tap the "Send" button
-- **What it does**: Sends SMS directly from your device
-- **Privacy**: No data is collected or transmitted
+### 1. `SEND_SMS`
+- **Why**: To send SMS messages.
+- **When**: When you send immediately, from a scheduled job, or from the queue.
 
-### 2. `READ_CONTACTS` Permission
-- **Why**: To allow you to select recipients from your contact list
-- **When used**: Only when you tap "Load Contacts"
-- **What it does**: Reads contact names and phone numbers locally
-- **Privacy**: Contact data never leaves your device
+### 2. `READ_CONTACTS`
+- **Why**: To pick recipients from your contacts.
+- **When**: When you open the contact picker.
 
-Both permissions are requested at runtime with clear explanations. You can deny permissions and still use the app with manual phone number entry.
+### 3. `READ_PHONE_STATE`
+- **Why**: To list active SIM cards and show SIM labels (e.g. SIM 1 / SIM 2) so you can choose which SIM to use.
+- **When**: When you open SIM selection (optional—if denied, only “Default SIM” may be available).
+
+### 4. `REQUEST_IGNORE_BATTERY_OPTIMIZATIONS`
+- **Why**: So scheduled messages are more likely to fire on time on aggressive power-saving devices.
+- **When**: Only when you use scheduling and the app shows the optional system dialog (you can deny and still schedule; reliability may vary by device).
+
+No permission is used for analytics or advertising. Denying contacts or phone state still allows manual numbers and default SIM sending in most cases.
 
 ## 🏗️ How to Build
 
@@ -142,10 +151,10 @@ This project uses **GitHub Actions** for automated releases:
 
 ### Creating a Release
 
-1. **Create and push a tag**:
+1. **Create and push a tag** (example for v1.1.0):
    ```bash
-   git tag -a v1.0.0 -m "Release version 1.0.0"
-   git push origin v1.0.0
+   git tag -a v1.1.0 -m "Release version 1.1.0"
+   git push origin v1.1.0
    ```
 
 2. **GitHub Actions will automatically**:
@@ -154,22 +163,27 @@ This project uses **GitHub Actions** for automated releases:
    - Create a GitHub Release
    - Attach the APK to the release
 
-### Configuring Signing (Optional)
+### Configuring Signing (recommended for upgrades)
 
-To enable APK signing in GitHub Actions:
+Repository secrets expected by `.github/workflows/release.yml`:
 
-1. Create a keystore file
-2. Encode it in base64:
-   ```bash
-   base64 -i my-release-key.jks | pbcopy
-   ```
-3. Add GitHub Secrets:
-   - `KEYSTORE_FILE`: Base64-encoded keystore file
-   - `KEYSTORE_PASSWORD`: Keystore password
-   - `KEY_PASSWORD`: Key password
-   - `KEY_ALIAS`: Key alias
+| Secret | Description |
+|--------|-------------|
+| `KEYSTORE_BASE64` | Your `.jks` file, **base64-encoded** (one line) |
+| `KEYSTORE_PASSWORD` | Keystore password |
+| `KEY_PASSWORD` | Key password |
+| `KEY_ALIAS` | Key alias |
 
-If signing is not configured, the workflow will create an unsigned APK.
+Encode example (Linux/macOS):
+
+```bash
+base64 -w 0 my-release-key.jks   # Linux
+base64 -i my-release-key.jks     # macOS
+```
+
+Paste the output into `KEYSTORE_BASE64`. **Use the same keystore as Cafe Bazaar / previous installs** so updates install over the old app.
+
+If these secrets are missing, the workflow still uploads an APK built from `assembleRelease`, but it will **not** match your Play/Cafe signing key unless you sign locally.
 
 ## 📸 Screenshots
 
@@ -195,26 +209,72 @@ Download the app from CafeBazaar (Iranian app store):
 - **Target SDK**: 34 (Android 14)
 - **Build System**: Gradle with Kotlin DSL
 
+## 📜 Changelog
+
+### v1.1.0 (current)
+
+**English**
+
+- SIM selection (default / per-slot on multi-SIM).
+- Recipient groups (save, load, delete).
+- Scheduled SMS with confirmation, battery optimization prompt, toolbar manager (cancel / send now / reschedule).
+- Prepared message templates.
+- Share targets: `ACTION_SEND` (text) and `ACTION_SENDTO` (`sms`, `smsto`, `mms`/`mmsto` schemes).
+- Bulk send queue: pause, resume, cancel; improved status dialog and share report.
+- Contact selection fixes for multiple numbers per contact.
+- Locale fixes: SIM labels, date/time pickers, segment & recipient strings update when switching EN/فا without killing the app.
+- About links include UTM parameters.
+- Uses WorkManager as fallback when exact alarms are restricted.
+
+**فارسی**
+
+- انتخاب سیم‌کارت (پیش‌فرض یا اسلات مشخص).
+- گروه‌های گیرنده (ذخیره، بارگذاری، حذف).
+- پیام زمان‌بندی‌شده با تأیید، درخواست بهینه‌سازی باتری، مدیریت از نوار (لغو / فوری / زمان جدید).
+- پیام‌های آماده (قالب).
+- ورودی از اشتراک‌گذاری و لینک‌های پیامک.
+- صف ارسال: توقف، ادامه، لغو؛ بهبود گزارش ارسال.
+- رفع انتخاب چند شماره برای یک مخاطب.
+- هماهنگی زبان با برچسب سیم، تقویم و شمارنده بدون بستن برنامه.
+- لینک‌های درباره با UTM؛ پشتیبان WorkManager برای زمان‌بندی.
+
+### v1.0.0
+
+Initial public release: multi-part long SMS, contacts, bulk confirmation, bilingual UI, dark mode, no internet permission.
+
+---
+
 ## 📋 Features
 
-- ✅ Send unlimited length SMS as multi-part
-- ✅ Prevent MMS conversion
-- ✅ Contact selection (single/multiple/all) with search
+### Core app capabilities
+
+- ✅ Send unlimited length SMS as multi-part messages
+- ✅ Prevent MMS conversion for long text
+- ✅ Contact selection (single / multiple / all) with search; correct behavior when one contact has several numbers
 - ✅ Manual phone number input (multi-line support)
 - ✅ Fast paste button
-- ✅ Real-time segment counter
-- ✅ Send status tracking with detailed dialogs
+- ✅ Real-time SMS segment counter
+- ✅ Send status tracking with detailed dialogs and shareable report
 - ✅ Bulk send confirmation
-- ✅ Progress dialog for long sends
+- ✅ Progress dialog for long sends; pause, resume, or cancel the send queue
 - ✅ Persian & English language support
-- ✅ Quick language switch button (EN/فا)
-- ✅ RTL (Right-to-Left) layout support
-- ✅ Dark mode, Light mode, and System default theme
-- ✅ Theme change notifications
-- ✅ Alphabetical scroller for contacts
+- ✅ Quick language switch (EN / فا)
+- ✅ RTL (right-to-left) layout support
+- ✅ Dark mode, light mode, and system default theme
+- ✅ Theme change toast / feedback
+- ✅ Alphabetical fast scroller for contacts
 - ✅ Tablet & landscape support
 - ✅ No ads, no analytics, no tracking
 - ✅ No internet permission required
+
+### Added in v1.1.0
+
+- ✅ SIM selection (default SIM or a chosen slot on dual-SIM devices)
+- ✅ Recipient groups (save, load, delete)
+- ✅ Scheduled SMS with confirmation; optional battery optimization prompt; toolbar manager (cancel, send now, reschedule)
+- ✅ Prepared message templates next to the message field
+- ✅ Share into the app (`ACTION_SEND`, `sms` / `smsto` links)
+- ✅ Locale fixes: SIM labels, date/time pickers, and counters stay aligned after switching language
 
 ## 🤝 Contributing
 

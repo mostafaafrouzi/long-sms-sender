@@ -65,6 +65,16 @@
                 android:contentDescription="@string/share_app"
                 android:padding="8dp" />
 
+            <ImageButton
+                android:id="@+id/btnScheduledJobs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_schedule"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/scheduled_jobs_title"
+                android:visibility="gone"
+                android:padding="8dp" />
+
         </LinearLayout>
 
     </androidx.appcompat.widget.Toolbar>
@@ -134,6 +144,44 @@
                 android:alpha="0.6"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="4dp" />
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                
+                <Button
+                    android:id="@+id/btnSim"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/sim_default"
+                    android:minWidth="0dp"
+                    android:textAllCaps="false"
+                    android:layout_marginEnd="4dp" />
+                
+                <Button
+                    android:id="@+id/btnGroups"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/groups"
+                    android:minWidth="0dp"
+                    android:textAllCaps="false"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp" />
+                
+                <Button
+                    android:id="@+id/btnSchedule"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/schedule"
+                    android:minWidth="0dp"
+                    android:textAllCaps="false"
+                    android:layout_marginStart="4dp" />
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -166,18 +214,38 @@
                     android:scrollbars="vertical"
                     android:padding="12dp" />
 
-                <ImageButton
-                    android:id="@+id/btnPaste"
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:src="@drawable/ic_paste"
-                    android:background="@drawable/ripple_paste_button"
-                    android:contentDescription="@string/paste"
-                    android:scaleType="centerInside"
-                    android:padding="8dp"
-                    android:clipToPadding="true"
-                    android:outlineProvider="bounds" />
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+
+                    <ImageButton
+                        android:id="@+id/btnPreparedMessages"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="44dp"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_prepared_messages"
+                        android:background="@drawable/ripple_paste_button"
+                        android:contentDescription="@string/prepared_messages"
+                        android:scaleType="centerInside" />
+
+                    <ImageButton
+                        android:id="@+id/btnPaste"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_paste"
+                        android:background="@drawable/ripple_paste_button"
+                        android:contentDescription="@string/paste"
+                        android:scaleType="centerInside"
+                        android:padding="8dp"
+                        android:clipToPadding="true"
+                        android:outlineProvider="bounds" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -197,6 +265,17 @@
                     android:textColor="?attr/colorOnSurface"
                     android:alpha="0.7"
                     android:maxLines="1" />
+
+                <TextView
+                    android:id="@+id/txtScheduledTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textSize="12sp"
+                    android:textColor="?attr/colorPrimary"
+                    android:visibility="gone"
+                    tools:text="Scheduled for 2026/01/01 12:00"
+                    tools:visibility="visible" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

@@ -43,6 +43,17 @@
             android:paddingEnd="12dp" />
 
         <Button
+            android:id="@+id/btnTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/theme"
+            android:textColor="@android:color/white"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:minWidth="0dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp" />
+
+        <Button
             android:id="@+id/btnAbout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -64,8 +75,18 @@
             android:paddingStart="12dp"
             android:paddingEnd="12dp" />
 
+        <ImageButton
+            android:id="@+id/btnScheduledJobs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_schedule"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/scheduled_jobs_title"
+            android:visibility="gone"
+            android:padding="8dp" />
+
         <Button
-            android:id="@+id/btnLoadContacts"
+            android:id="@+id/btnContacts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/load_contacts"
@@ -215,6 +236,49 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+        
+        <LinearLayout
+            android:id="@+id/layoutPhoneActions"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/edtPhone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+            
+            <Button
+                android:id="@+id/btnSim"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/sim_default"
+                android:minWidth="0dp"
+                android:textAllCaps="false"
+                android:layout_marginEnd="4dp" />
+            
+            <Button
+                android:id="@+id/btnGroups"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/groups"
+                android:minWidth="0dp"
+                android:textAllCaps="false"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp" />
+            
+            <Button
+                android:id="@+id/btnSchedule"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/schedule"
+                android:minWidth="0dp"
+                android:textAllCaps="false"
+                android:layout_marginStart="4dp" />
+        </LinearLayout>
 
         <EditText
             android:id="@+id/edtMessage"
@@ -226,20 +290,43 @@
             android:maxLines="6"
             android:gravity="top|start"
             android:textDirection="locale"
-            app:layout_constraintTop_toBottomOf="@id/edtPhone"
+            app:layout_constraintTop_toBottomOf="@id/layoutPhoneActions"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/btnPaste" />
+            app:layout_constraintEnd_toStartOf="@id/layoutMessageSideActions" />
 
-        <ImageButton
-            android:id="@+id/btnPaste"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@drawable/ic_paste"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/paste"
-            app:layout_constraintEnd_toEndOf="parent"
+        <LinearLayout
+            android:id="@+id/layoutMessageSideActions"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            app:layout_constraintTop_toTopOf="@id/edtMessage"
             app:layout_constraintBottom_toBottomOf="@id/edtMessage"
-            app:layout_constraintTop_toTopOf="@id/edtMessage"/>
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageButton
+                android:id="@+id/btnPreparedMessages"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="44dp"
+                android:padding="8dp"
+                android:src="@drawable/ic_prepared_messages"
+                android:background="@drawable/ripple_paste_button"
+                android:contentDescription="@string/prepared_messages"
+                android:scaleType="centerInside" />
+
+            <ImageButton
+                android:id="@+id/btnPaste"
+                android:layout_width="48dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:minHeight="44dp"
+                android:src="@drawable/ic_paste"
+                android:background="@drawable/ripple_paste_button"
+                android:contentDescription="@string/paste"
+                android:scaleType="centerInside" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/txtSegment"
@@ -250,6 +337,17 @@
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/edtMessage"/>
+
+        <TextView
+            android:id="@+id/txtScheduledTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="?attr/colorPrimary"
+            android:visibility="gone"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtSegment"/>
 
         <Button
             android:id="@+id/btnSend"
@@ -280,7 +378,7 @@
             android:textColor="?attr/colorPrimary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/progressSending"
-            app:layout_constraintTop_toBottomOf="@id/txtSegment"
+            app:layout_constraintTop_toBottomOf="@id/txtScheduledTime"
             tools:text="Status: Ready"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
