@@ -108,14 +108,6 @@ On the device, allow **install from unknown sources** (or your browser’s insta
 
 ---
 
-## 📸 Screenshots
-
-![Main Screen](screenshots/main.png)
-![Contact Selection](screenshots/contacts.png)
-![Dark Mode](screenshots/dark.png)
-
----
-
 ## 📜 Changelog
 
 ### v1.1.0 (current)

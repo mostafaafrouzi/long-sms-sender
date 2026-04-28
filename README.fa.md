@@ -107,14 +107,6 @@
 
 ---
 
-## 📸 تصاویر
-
-![صفحه اصلی](screenshots/main.png)
-![انتخاب مخاطب](screenshots/contacts.png)
-![حالت تاریک](screenshots/dark.png)
-
----
-
 ## 📜 تاریخچه نسخه‌ها
 
 ### v1.1.0 (فعلی)
