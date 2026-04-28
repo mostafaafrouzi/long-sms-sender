@@ -2,7 +2,7 @@
 
 [🇮🇷 فارسی](README.fa.md) | [🇺🇸 English](README.md)
 
-![Long SMS Sender](long-sms-sender.png)
+![Long SMS Sender](https://github.com/mostafaafrouzi/long-sms-sender/raw/main/long-sms-sender-en.png)
 
 A production-grade Android application that allows users to send very long text messages as real multi-part SMS, **absolutely preventing conversion to MMS**.
 

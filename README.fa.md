@@ -2,7 +2,7 @@
 
 [🇺🇸 English](README.md) | [🇮🇷 فارسی](README.fa.md)
 
-![ارسال پیامک بلند](long-sms-sender.png)
+![ارسال پیامک بلند](https://github.com/mostafaafrouzi/long-sms-sender/raw/main/long-sms-sender-fa.png)
 
 یک برنامهٔ اندروید است که به شما امکان می‌دهد متن‌های **خیلی بلند** را به‌صورت **پیامک چندبخشی واقعی** بفرستید و **تا حد ممکن از تبدیل ناخواسته به MMS** جلوگیری کنید.
 
