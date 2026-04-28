@@ -119,8 +119,6 @@
 
 ### v1.1.0 (فعلی)
 
-**فارسی (جزئیات)**
-
 - انتخاب **سیم‌کارت** و **گروه گیرنده**.  
 - **زمان‌بندی** با دیالوگ تأیید؛ راهنمای **باتری** در صورت نیاز؛ مدیریت از **آیکون ساعت** در نوار (لغو، ارسال فوری، زمان جدید).  
 - **پیام‌های آماده** (قالب).  
@@ -130,10 +128,6 @@
 - هماهنگی **زبان** با برچسب سیم و **تقویم/ساعت** بعد از تعویض زبان.  
 - لینک‌های **درباره** با **UTM**.  
 - **WorkManager** اگر **آلارم دقیق** در دسترس نباشد.  
-
-**English (summary)**
-
-- SIM selection, recipient groups, scheduling + toolbar, templates, share, queue controls, contact multi-number fix, locale fixes, About UTM, WorkManager fallback.  
 
 ### v1.0.0
 
@@ -289,7 +283,12 @@ base64 -i my-release-key.jks
 
 ## 👤 توسعه‌دهنده
 
-**مصطفی افرازی** — [github.com/mostafaafrouzi](https://github.com/mostafaafrouzi)
+**مصطفی افرازی**
+
+- [گیت‌هاب](https://github.com/mostafaafrouzi) — [github.com/mostafaafrouzi](https://github.com/mostafaafrouzi)  
+- [لینکدین](https://linkedin.com/in/mostafaafrouzi) — [linkedin.com/in/mostafaafrouzi](https://linkedin.com/in/mostafaafrouzi)  
+- وب‌سایت (فارسی، UTM) — [afrouzi.ir](https://afrouzi.ir/?utm_source=com.afrouzi.longsmssender&utm_medium=application&utm_campaign=portfolio)  
+- وب‌سایت (انگلیسی، UTM) — [afrouzi.ir/en](https://afrouzi.ir/en/?utm_source=com.afrouzi.longsmssender&utm_medium=application&utm_campaign=portfolio)  
 
 ## ⚠️ سلب مسئولیت
 

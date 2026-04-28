@@ -120,8 +120,6 @@ On the device, allow **install from unknown sources** (or your browser’s insta
 
 ### v1.1.0 (current)
 
-**English (high level)**
-
 - SIM selection (default or specific SIM on multi-SIM devices).  
 - Recipient groups: save, load, delete.  
 - Scheduled SMS: date/time, confirmation dialog, optional battery dialog; management from the **clock** icon in the toolbar (cancel, send now, edit/reschedule).  
@@ -132,14 +130,6 @@ On the device, allow **install from unknown sources** (or your browser’s insta
 - Locale: SIM button, pickers, counters refresh correctly after **EN ⟷ فا** switch.  
 - About links: UTM tags.  
 - Scheduling: **WorkManager** fallback if exact alarm is not available.  
-
-**فارسی (خلاصه)**
-
-- انتخاب سیم‌کارت و گروه گیرنده.  
-- زمان‌بندی با مدیریت از نوار، پیام آماده، ورودی از اشتراک‌گذاری.  
-- کنترل صف ارسال و بهبود گزارش.  
-- رفع چند شماره برای یک مخاطب؛ هماهنگی زبان و تقویم.  
-- لینک‌های درباره با UTM؛ پشتیبان WorkManager برای زمان‌بندی.  
 
 ### v1.0.0
 
@@ -299,7 +289,12 @@ This project is open source under the [MIT License](LICENSE).
 
 ## 👤 Developer
 
-**Mostafa Afrouzi** — [github.com/mostafaafrouzi](https://github.com/mostafaafrouzi)
+**Mostafa Afrouzi**
+
+- [GitHub](https://github.com/mostafaafrouzi) — [github.com/mostafaafrouzi](https://github.com/mostafaafrouzi)  
+- [LinkedIn](https://linkedin.com/in/mostafaafrouzi) — [linkedin.com/in/mostafaafrouzi](https://linkedin.com/in/mostafaafrouzi)  
+- Website (Persian, UTM) — [afrouzi.ir](https://afrouzi.ir/?utm_source=com.afrouzi.longsmssender&utm_medium=application&utm_campaign=portfolio)  
+- Website (English, UTM) — [afrouzi.ir/en](https://afrouzi.ir/en/?utm_source=com.afrouzi.longsmssender&utm_medium=application&utm_campaign=portfolio)  
 
 ## ⚠️ Disclaimer
 
