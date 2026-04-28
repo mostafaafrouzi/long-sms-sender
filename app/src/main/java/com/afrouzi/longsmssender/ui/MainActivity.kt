@@ -69,6 +69,9 @@ import java.util.concurrent.TimeUnit
 class MainActivity : AppCompatActivity() {
     companion object {
         private const val REQUEST_PHONE_STATE_FOR_SIM = 2001
+        private const val STATE_SCHEDULE_DUE_AT = "state_schedule_due_at"
+        private const val STATE_SCHEDULE_RECIPIENTS = "state_schedule_recipients"
+        private const val STATE_SCHEDULE_MESSAGE = "state_schedule_message"
     }
     
     private data class PendingSchedulePayload(
@@ -110,7 +113,13 @@ class MainActivity : AppCompatActivity() {
             reopenScheduleAfterBatteryRequest = false
             if (isIgnoringBatteryOptimizations()) {
                 pendingSchedulePayload?.let { payload ->
-                    showScheduleDialog(payload.recipientsRaw, payload.message)
+                    if (!isFinishing && !isDestroyed) {
+                        window.decorView.post {
+                            if (!isFinishing && !isDestroyed) {
+                                showScheduleDialog(payload.recipientsRaw, payload.message)
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -139,12 +148,9 @@ class MainActivity : AppCompatActivity() {
 
     /** Dialogs pick up theme + locale correctly (Activity resources alone can lag behind in-app locale). */
     private fun schedulePickerContext(): Context {
-        val lang = LocaleManager.getCurrentLanguage(this)
-        val locale = Locale.forLanguageTag(if (lang == "fa") "fa" else "en")
-        val config = Configuration(resources.configuration)
-        config.setLocale(locale)
-        val localized = createConfigurationContext(config)
-        return ContextThemeWrapper(localized, R.style.Theme_LongSmsSender)
+        // Date/Time pickers must use an Activity-backed context, otherwise they can crash with
+        // BadTokenException (token null) when shown from activity-result callbacks.
+        return ContextThemeWrapper(this, R.style.Theme_LongSmsSender)
     }
 
     private fun applyLayoutDirection() {
@@ -201,6 +207,37 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        pendingScheduleDraft?.let { draft ->
+            outState.putLong(STATE_SCHEDULE_DUE_AT, draft.dueAtMillis)
+            outState.putString(STATE_SCHEDULE_RECIPIENTS, draft.recipientsRaw)
+            outState.putString(STATE_SCHEDULE_MESSAGE, draft.message)
+        }
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        val dueAt = savedInstanceState.getLong(STATE_SCHEDULE_DUE_AT, -1L)
+        val recipientsRaw = savedInstanceState.getString(STATE_SCHEDULE_RECIPIENTS).orEmpty()
+        val message = savedInstanceState.getString(STATE_SCHEDULE_MESSAGE).orEmpty()
+        if (dueAt > System.currentTimeMillis() && recipientsRaw.isNotBlank() && message.isNotBlank()) {
+            val scheduledLabel = formatScheduleTime(dueAt)
+            pendingScheduleDraft = PendingScheduleDraft(
+                dueAtMillis = dueAt,
+                recipientsRaw = recipientsRaw,
+                message = message,
+                label = scheduledLabel
+            )
+            scheduledTimeLabel = scheduledLabel
+            findViewById<TextView>(R.id.txtScheduledTime)?.apply {
+                visibility = View.VISIBLE
+                text = getString(R.string.scheduled_time_footer, scheduledLabel)
+            }
+            updateSendButtonForScheduledState()
+        }
+    }
+
     private fun setupUI() {
         updateLanguageButton()
         findViewById<View>(R.id.btnLanguage)?.setOnClickListener {
@@ -224,10 +261,20 @@ class MainActivity : AppCompatActivity() {
         }
         findViewById<Button>(R.id.btnSim)?.setOnClickListener { showSimPickerDialog() }
         findViewById<Button>(R.id.btnGroups)?.setOnClickListener { showGroupsDialog() }
-        findViewById<Button>(R.id.btnSchedule)?.setOnClickListener { showScheduleDialog() }
+        findViewById<Button>(R.id.btnSchedule)?.setOnClickListener {
+            val draft = pendingScheduleDraft
+            if (draft != null) {
+                showPendingScheduleDraftActionsDialog(draft)
+            } else {
+                showScheduleDialog()
+            }
+        }
         findViewById<ImageButton>(R.id.btnScheduledJobs)?.setOnClickListener { showScheduledJobsDialog() }
         findViewById<ImageButton>(R.id.btnPreparedMessages)?.setOnClickListener {
             showPreparedMessagesRootDialog()
+        }
+        findViewById<TextView>(R.id.txtScheduledTime)?.setOnClickListener {
+            pendingScheduleDraft?.let { draft -> showPendingScheduleDraftActionsDialog(draft) }
         }
 
         val edtPhone = findViewById<EditText>(R.id.edtPhone)
@@ -1062,7 +1109,7 @@ class MainActivity : AppCompatActivity() {
                                     R.string.schedule_confirm_message,
                                     scheduledLabel,
                                     String.format(Locale.US, "%d", recipientsCount)
-                                )
+                                ) + "\n\n" + getString(R.string.schedule_pre_send_manage_hint)
                             )
                             .setPositiveButton(R.string.schedule_set) { _, _ ->
                                 prepareScheduledDraft(
@@ -1328,6 +1375,26 @@ class MainActivity : AppCompatActivity() {
         scheduledTimeLabel = null
         findViewById<TextView>(R.id.txtScheduledTime)?.visibility = View.GONE
         updateSendButtonForScheduledState()
+    }
+
+    private fun showPendingScheduleDraftActionsDialog(draft: PendingScheduleDraft) {
+        val actions = arrayOf(
+            getString(R.string.scheduled_draft_action_edit_time),
+            getString(R.string.scheduled_draft_action_remove)
+        )
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.scheduled_draft_actions_title, draft.label))
+            .setItems(actions) { _, which ->
+                when (which) {
+                    0 -> showScheduleDialog(draft.recipientsRaw, draft.message)
+                    1 -> {
+                        clearScheduledUiState()
+                        showSnackbar(getString(R.string.scheduled_draft_removed), Snackbar.LENGTH_SHORT)
+                    }
+                }
+            }
+            .setNegativeButton(R.string.cancel, null)
+            .show()
     }
 
     private fun refreshScheduledJobsUi() {

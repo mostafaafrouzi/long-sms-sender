@@ -119,6 +119,7 @@
     <string name="schedule_invalid_time">لطفا زمان آینده انتخاب کنید</string>
     <string name="schedule_send_button_text">ارسال پیام زمان‌بندی‌شده</string>
     <string name="schedule_confirm_message">پیام شما برای %1$s زمان‌بندی می‌شود.\n\nتعداد گیرندگان: %2$s</string>
+    <string name="schedule_pre_send_manage_hint">قبل از ارسال، با کلیک دوباره روی دکمه زمان‌بندی می‌توانید زمان را تغییر دهید یا این زمان‌بندی را حذف کنید.</string>
     <string name="schedule_set_with_time">برای %1$s زمان‌بندی شد</string>
     <string name="mms_warning_title">هشدار MMS</string>
     <string name="mms_warning_message">ارسال MMS در ایران به‌صورت پایدار پشتیبانی نمی‌شود. برای ارسال این محتوا از همین برنامه به‌صورت SMS استفاده کنید.</string>
@@ -156,6 +157,10 @@
     <string name="scheduled_action_cancel">لغو زمان‌بندی</string>
     <string name="scheduled_job_cancelled">زمان‌بندی لغو شد</string>
     <string name="scheduled_edit_pick_time">تاریخ و زمان جدید را انتخاب کنید</string>
+    <string name="scheduled_draft_actions_title">زمان‌بندی موقت: %1$s</string>
+    <string name="scheduled_draft_action_edit_time">تغییر زمان</string>
+    <string name="scheduled_draft_action_remove">حذف زمان‌بندی</string>
+    <string name="scheduled_draft_removed">زمان‌بندی موقت حذف شد</string>
 
     <string name="prepared_messages">پیام‌های آماده</string>
     <string name="prepared_insert_title">درج از قالب…</string>

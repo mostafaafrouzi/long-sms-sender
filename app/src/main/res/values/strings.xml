@@ -119,6 +119,7 @@
     <string name="schedule_invalid_time">Select a future time</string>
     <string name="schedule_send_button_text">Send Scheduled Message</string>
     <string name="schedule_confirm_message">Your message is scheduled for %1$s.\n\nRecipients: %2$s</string>
+    <string name="schedule_pre_send_manage_hint">Before sending, tap Schedule again to change the time or remove this schedule.</string>
     <string name="schedule_set_with_time">Scheduled for %1$s</string>
     <string name="mms_warning_title">MMS Warning</string>
     <string name="mms_warning_message">MMS is not reliably supported in Iran. To send this content, use this app as SMS.</string>
@@ -156,6 +157,10 @@
     <string name="scheduled_action_cancel">Cancel schedule</string>
     <string name="scheduled_job_cancelled">Schedule cancelled</string>
     <string name="scheduled_edit_pick_time">Choose a new date and time</string>
+    <string name="scheduled_draft_actions_title">Scheduled draft: %1$s</string>
+    <string name="scheduled_draft_action_edit_time">Change time</string>
+    <string name="scheduled_draft_action_remove">Remove schedule</string>
+    <string name="scheduled_draft_removed">Scheduled draft removed</string>
 
     <string name="prepared_messages">Prepared messages</string>
     <string name="prepared_insert_title">Insert from template…</string>

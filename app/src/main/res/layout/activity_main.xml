@@ -158,7 +158,14 @@
                     android:layout_weight="1"
                     android:text="@string/sim_default"
                     android:minWidth="0dp"
+                    android:maxLines="1"
+                    android:minLines="1"
+                    android:includeFontPadding="false"
                     android:textAllCaps="false"
+                    app:autoSizeTextType="uniform"
+                    app:autoSizeMinTextSize="10sp"
+                    app:autoSizeMaxTextSize="14sp"
+                    app:autoSizeStepGranularity="1sp"
                     android:layout_marginEnd="4dp" />
                 
                 <Button
